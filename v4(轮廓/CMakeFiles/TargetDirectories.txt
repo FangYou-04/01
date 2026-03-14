@@ -1,0 +1,5 @@
+/home/fang/c/v4/CMakeFiles/d1.dir
+/home/fang/c/v4/CMakeFiles/d2.dir
+/home/fang/c/v4/CMakeFiles/d3.dir
+/home/fang/c/v4/CMakeFiles/edit_cache.dir
+/home/fang/c/v4/CMakeFiles/rebuild_cache.dir

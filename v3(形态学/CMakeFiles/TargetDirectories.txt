@@ -1,0 +1,8 @@
+/home/fang/c/v3(形态学/CMakeFiles/c1.dir
+/home/fang/c/v3(形态学/CMakeFiles/c2.dir
+/home/fang/c/v3(形态学/CMakeFiles/c3.dir
+/home/fang/c/v3(形态学/CMakeFiles/c4.dir
+/home/fang/c/v3(形态学/CMakeFiles/c5.dir
+/home/fang/c/v3(形态学/CMakeFiles/c6.dir
+/home/fang/c/v3(形态学/CMakeFiles/edit_cache.dir
+/home/fang/c/v3(形态学/CMakeFiles/rebuild_cache.dir

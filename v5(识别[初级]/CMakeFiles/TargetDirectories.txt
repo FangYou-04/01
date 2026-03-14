@@ -1,0 +1,7 @@
+/home/fang/c/v5(识别[初级]/CMakeFiles/e1.dir
+/home/fang/c/v5(识别[初级]/CMakeFiles/e2.dir
+/home/fang/c/v5(识别[初级]/CMakeFiles/f1.dir
+/home/fang/c/v5(识别[初级]/CMakeFiles/f2.dir
+/home/fang/c/v5(识别[初级]/CMakeFiles/f3.dir
+/home/fang/c/v5(识别[初级]/CMakeFiles/edit_cache.dir
+/home/fang/c/v5(识别[初级]/CMakeFiles/rebuild_cache.dir

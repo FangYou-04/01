@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.15)
+project(test)
+add_executable(app U.cpp)
+add_executable(app2 V.cpp)
+add_executable(app3 W.cpp)
+add_executable(app4 Y.cpp)
+add_executable(hello hello.cpp)
