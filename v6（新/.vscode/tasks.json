@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++ 生成活动文件",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                // 包含两个OpenCV头文件路径
+                "-I/usr/local/include/opencv4",
+                "home/fang/下载/opencv-4.6.0/include",
+                // 链接OpenCV核心库（按需添加其他库，如opencv_imgproc、opencv_videoio）
+                "-L/usr/local/lib",
+                "-L/usr/lib/x86_64-linux-gnu",
+                "-lopencv_core",
+                "-lopencv_highgui",
+                "-lopencv_imgcodecs"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "编译器: /usr/bin/g++"
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+---
+morph_config:
+  kernel_size: 9
+
+light_config:
+  area: 80
+  ratio_min: 2
+  ratio_max: 4
+  angle: 25
+  angle_to_up: 90.0
+
+armor_config:
+  distance_min: 2.0
+  distance_max: 3.0
+  armor_angle: 20
+  height_diff: 2
+  angle_diff: 2
+  armor_ratio_min: 2
+  armor_ratio_max: 4
