@@ -1,73 +1,218 @@
-#include "Config.hpp"
+#include "Congfig.hpp"
 #include "Struct.hpp"
-#include <opencv2/opencv.hpp>
+#include "PoseSlove.hpp"
+#include <algorithm>
 #include <cmath>
-#include <vector>
+#include <cfloat>
 
-// 灯条配对
-bool isLightMatch(const LightBar& left, const LightBar& right) 
+
+// 图像预处理
+cv::Mat ArmorsDetector::preprocessImage(const cv::Mat &img) 
 {
-    // 1. 角度差判断：灯条角度差不能超过阈值
-    // 装甲板左右灯条应该保持平行，角度差很小
-    if (fabs(left.angle - right.angle) > LIGHT_ANGLE_MAX) 
+    
+    if(img.empty() || img.data == nullptr || img.rows == 0 ||
+         img.cols == 0 || img.type() != CV_8UC3)
     {
-        return false;
+        std::cout << "[ERROR]预处理图像无效" << std::endl;
+        return cv::Mat();
     }
-    // 2. 长度比例判断：灯条长度比例不能相差太大
-    // 装甲板左右灯条长度应该相近，避免匹配到不同大小的灯条
-    float lengthRatio = std::min(left.length, right.length) / std::max(left.length, right.length);
-    if (lengthRatio < (1 - LIGHT_LENGTH_DIFF_RATIO)) 
-    {
-        return false;
-    }
-    // 3. 位置判断：确保左灯条在左，右灯条在右
-    // 装甲板的左右灯条应该符合视觉上的左右位置关系
-    if (left.center.x >= right.center.x) 
-    {
-        return false; // 保证left在左边，right在右边
-    }
-    // 4. 连线角度判断：灯条中心连线与水平方向的夹角不能太大
-    // 装甲板的左右灯条应该基本在同一水平线上
-    float deltaY = right.center.y - left.center.y;
-    float deltaX = right.center.x - left.center.x;
-    float angle = fabs (atan2(deltaY, deltaX) * 180.0 / CV_PI);
-    if (angle > ARMOR_ANGLE_MAX)
-    {
-        return false;
-    }
-    // 5. 距离判断：灯条中心距离应该在合理范围内
-    // 装甲板的宽度（灯条中心距离）应该与灯条长度成比例
-    float Distance = cv::norm(left.center - right.center);
-    float avgLength = (left.length + right.length) / 2.0f;
-    if (Distance < avgLength * DISTANCE_MIN || Distance > avgLength * DISTANCE_MAX) 
-    {
-        return false;
-    }
-    // 所有条件都满足，可以配对成装甲板
-    return true;
+
+    cv::Mat img_continuous = img.isContinuous() ? img : img.clone();
+
+    // 亮度调整（用户可能设置 beta 为负值，例如 -50）
+    cv::Mat img_L;
+    int beta = -100; // 如果要测试不同亮度请修改此处
+    img_continuous.convertTo(img_L, -1, 1.0, beta);
+
+    cv::Mat gray, binary;
+    cv::cvtColor(img_L, gray, cv::COLOR_BGR2GRAY);
+
+    cv::threshold(gray, binary, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
+
+    // 形态学操作
+    cv::Mat kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(config_.morph_config.kernel_size, config_.morph_config.kernel_size));
+    cv::Mat img_N;
+    cv::GaussianBlur(binary, img_N, cv::Size(5, 5), 0); // 可选：先进行高斯模糊，减少噪声对形态学的影响
+    cv::morphologyEx(img_N, img_N, cv::MORPH_OPEN, kernel);
+
+    cv::imshow("二值化", img_N);
+
+    return img_N;
 }
 
-// 装甲板匹配主函数
-std::vector<Armor> matchArmors(const std::vector<LightBar>& lightBars) 
+// 调整旋转矩形角度，使其长边接近垂直方向
+void adjustRotatedRect(cv::RotatedRect& rect, const float angle_to_up)
 {
-    std::vector<Armor> armors;
-    if (lightBars.size() < 2)
-    {
-        return armors; // 不足两个灯条，无法配对
+    // 保证 rect.size.height 为长边，并对 angle 做规范化到 [-90,90)
+    float w = rect.size.width;
+    float h = rect.size.height;
+    if (w > h) {
+        std::swap(rect.size.width, rect.size.height);
+        rect.angle += 90.0f; // 旋转角度随长短边交换而变化
     }
-    // 遍历所有灯条组合，尝试配对
-    for (size_t i = 0; i < lightBars.size(); i++)
+    // 规范化角度到 [-90,90)
+    while (rect.angle >= 90.0f) rect.angle -= 180.0f;
+    while (rect.angle < -90.0f) rect.angle += 180.0f;
+}
+
+// 灯条检测
+std::vector<Light> ArmorsDetector::detectLights(const cv::Mat &mask) 
+{
+    // 寻找轮廓
+    std::vector<std::vector<cv::Point>> contours;
+    std::vector<cv::Vec4i> hierarchy;
+    cv::findContours(mask, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
+
+    // 筛选灯条
+    std::vector<Light> lights;
+    for (size_t i = 0; i < contours.size(); i++) 
     {
-        for (size_t j = 0; j < lightBars.size(); j++)
+        // if (contours[i].size() < 5) continue; // 拟合椭圆至少需要5个点
+
+        double area = cv::contourArea(contours[i]);
+        if (area < config_.light_config.area) continue;
+
+        // 获取最小外接矩形
+        cv::RotatedRect rect = cv::minAreaRect(contours[i]);
+
+        // cv::RotatedRect rect;
+        // try 
+        // {
+        //     rect = cv::fitEllipse(contours[i]);
+        // } 
+        // catch (...) 
+        // {
+        //     rect = cv::minAreaRect(contours[i]); // 椭圆拟合失败时降级
+        // }
+
+        adjustRotatedRect(rect, config_.light_config.angle_to_up); // 调整角度使其接近垂直
+
+        // 规范化宽高
+        float width = rect.size.width;
+        float height = rect.size.height;
+        if (width > height) cv::swap(width, height);
+
+        // 计算比例和角度
+        float ratio = 0.0f; // 【必做】变量显式初始化
+        const float eps = 1e-6; // 浮点精度容错值，避免除0
+        if (width > eps) {
+            ratio = height / width;
+        }
+
+        float angle = rect.angle;
+
+        // // 计算轮廓的圆形度（灯条为细长矩形，圆形度接近0；反光点为圆形，圆形度接近1）
+        // float perimeter = cv::arcLength(contours[i], true);
+        // float circularity = 0.0f; // 【必做】变量显式初始化
+        // if (perimeter > eps) {
+        //     circularity = (4 * CV_PI * area) / (perimeter * perimeter);
+        // }
+        
+        // bool isNoise = (circularity > 0.8f) && (ratio < 1.8f); // 根据经验值判断是否为噪声
+        // if (isNoise) continue;
+
+        // 筛选符合比例和角度要求的灯条
+        if (ratio > config_.light_config.ratio_max || ratio < config_.light_config.ratio_min)
+            continue;
+
+        if (std::fabs(angle) > config_.light_config.angle)
+            continue;
+
+        Light light;
+        light.rect = rect;
+        light.rat = ratio;
+        light.AbsAngle = angle;
+        light.center = rect.center;
+
+        cv::Point2f pts[4];
+        light.rect.points(pts);
+
+        const int vertexCount = sizeof(light.vertices)/sizeof(light.vertices[0]);
+        
+        for (int k = 0; k < 4; k++) 
         {
-            if (isLightMatch(lightBars[i], lightBars[j])) 
-            {
-                armors.emplace_back(lightBars[i], lightBars[j]);
-            }
+            light.vertices[k] = pts[k];
+        }
+        lights.push_back(light);
+        
+    }
+    // 调试：打印检测到的灯条数量
+    std::cout << "检测到灯条数量：" << lights.size() << std::endl;
+
+    return lights;
+}
+
+// 装甲板配对
+std::vector<Armors> ArmorsDetector::matchArmors(const std::vector<Light> &lights) 
+{
+    std::vector<Armors> armors;
+    if (lights.size() < 2) return armors;
+
+    // 两两配对灯条
+    for (size_t i = 0; i < lights.size(); i++) 
+    {
+        for (size_t j = i + 1; j < lights.size(); j++) 
+        {
+            const Light &bar1 = lights[i];
+            const Light &bar2 = lights[j];
+
+            const Light &leftBar = bar1.center.x < bar2.center.x ? bar1 : bar2;
+            const Light &rightBar = bar1.center.x < bar2.center.x ? bar2 : bar1;
+
+            float distance = cv::norm(leftBar.center - rightBar.center);
+            float heightAvg = (leftBar.rect.size.height + rightBar.rect.size.height) / 2;
+
+            const float eps = 1e-6; // 浮点精度容错值，避免除0
+            if (heightAvg < eps) continue; // 避免除0
+
+            // 恢复垂直偏差筛选（关键！）
+            float yDiff = std::fabs(leftBar.center.y - rightBar.center.y);
+            if (yDiff > heightAvg * 0.9f) continue; // 垂直偏差≤50%
+
+            // 距离筛选
+            if (distance < heightAvg * config_.armor_config.distance_min || distance > heightAvg * config_.armor_config.distance_max) 
+                continue; 
+
+            float angle = fabs(atan2(rightBar.center.y - leftBar.center.y,
+                                     rightBar.center.x - leftBar.center.x) * 180 / CV_PI);
+            if (angle > config_.armor_config.armor_angle) continue;
+
+            float heightDiff = fabs(leftBar.rect.size.height - rightBar.rect.size.height)
+                               / std::max(leftBar.rect.size.height, rightBar.rect.size.height);
+            if (heightDiff > config_.armor_config.height_diff) continue;
+
+            float angleDiff = fabs(leftBar.AbsAngle - rightBar.AbsAngle);
+            if (angleDiff > config_.armor_config.angle_diff) continue;
+
+            float armorRatio = distance / heightAvg;
+            if (armorRatio < config_.armor_config.armor_ratio_min || armorRatio > config_.armor_config.armor_ratio_max) continue;
+
+            Armors armor;
+            armor.left = leftBar;
+            armor.right = rightBar;
+            armor.center = (leftBar.center + rightBar.center) * 0.5f;
+
+            cv::Point2f armorPts[4];
+            armorPts[0] = leftBar.vertices[1].y > leftBar.vertices[3].y ? leftBar.vertices[1] : leftBar.vertices[3];
+            armorPts[1] = rightBar.vertices[0].y > rightBar.vertices[2].y ? rightBar.vertices[0] : rightBar.vertices[2];
+            armorPts[2] = rightBar.vertices[0].y < rightBar.vertices[2].y ? rightBar.vertices[0] : rightBar.vertices[2];
+            armorPts[3] = leftBar.vertices[1].y < leftBar.vertices[3].y ? leftBar.vertices[1] : leftBar.vertices[3];
+
+            armor.corners.resize(4);  // 
+            std::copy(std::begin(armorPts), std::end(armorPts), std::begin(armor.corners));
+
+            std::vector<cv::Point2f> pts_vec(armorPts, armorPts + 4);
+            armor.boundingRect = cv::minAreaRect(pts_vec);
+            
+            armors.push_back(armor);
+
+            // 调试：打印角点坐标
+            std::cout << "装甲板角点坐标: " << armor.corners[0] << ", " << armor.corners[1] << ", " << armor.corners[2] << ", " << armor.corners[3] << std::endl;
+
         }
     }
+    // 调试：打印装甲板数量
+    std::cout << "检测到装甲板数量：" << armors.size() << std::endl;
+
     return armors;
 }
-
-
-

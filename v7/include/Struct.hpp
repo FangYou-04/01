@@ -1,22 +1,21 @@
-#ifndef STRUCT_HPP
-#define STRUCT_HPP
-#include <opencv2/opencv.hpp>
-#include <vector>
+#ifndef STRUCT_H
+#define STRUCT_H
 
-struct LightBar {
+
+#include <opencv4/opencv2/opencv.hpp>
+
+struct Light
+{
     cv::RotatedRect rect;
-    float angle;
-    float length;
-    float width;
+    float rat;
+    float AbsAngle;
     cv::Point2f center;
-    cv::Point2f verctices[4];
+    cv::Point2f vertices[4];
 
-    LightBar() = default;
-    LightBar(const cv::RotatedRect& r) : rect(r) {
-        angle = r.angle;
-        length = std::max(r.size.width, r.size.height);
-        width = std::min(r.size.width, r.size.height);
-        center = r.center;
-        r.points(verctices);
+    Light() 
+    {
+        memset(vertices, 0, sizeof(vertices));
     }
 };
+
+#endif
