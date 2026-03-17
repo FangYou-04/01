@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/opt/MVS/include -I/home/fang/++c/m/v6（新/include -isystem /usr/local/include/opencv4
+CXX_INCLUDES = -I/opt/MVS/include -I/home/fang/桌面/vision01/v7/include -isystem /usr/local/include/opencv4
 
 CXX_FLAGS = -std=gnu++17
 

@@ -1,6 +1,6 @@
 main/CMakeFiles/Armor.dir/draw.cpp.o: \
- /home/fang/++c/m/v6（新/main/draw.cpp /usr/include/stdc-predef.h \
- /home/fang/++c/m/v6（新/include/PoseSlove.hpp \
+ /home/fang/桌面/vision01/v7/main/draw.cpp /usr/include/stdc-predef.h \
+ /home/fang/桌面/vision01/v7/include/PoseSlove.hpp \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
@@ -352,9 +352,9 @@ main/CMakeFiles/Armor.dir/draw.cpp.o: \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
- /home/fang/++c/m/v6（新/include/Struct.hpp \
+ /home/fang/桌面/vision01/v7/include/Struct.hpp \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
- /home/fang/++c/m/v6（新/include/Congfig.hpp \
+ /home/fang/桌面/vision01/v7/include/Congfig.hpp \
  /usr/include/yaml-cpp/yaml.h /usr/include/yaml-cpp/parser.h \
  /usr/include/yaml-cpp/dll.h /usr/include/yaml-cpp/emitter.h \
  /usr/include/yaml-cpp/binary.h /usr/include/yaml-cpp/emitterdef.h \
@@ -378,4 +378,4 @@ main/CMakeFiles/Armor.dir/draw.cpp.o: \
  /usr/include/yaml-cpp/node/convert.h \
  /usr/include/yaml-cpp/node/detail/impl.h \
  /usr/include/yaml-cpp/node/parse.h /usr/include/yaml-cpp/node/emit.h \
- /home/fang/++c/m/v6（新/include/Struct.hpp
+ /home/fang/桌面/vision01/v7/include/Struct.hpp

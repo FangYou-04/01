@@ -1,226 +1,222 @@
 #include "Congfig.hpp"
 #include "Struct.hpp"
 #include "PoseSlove.hpp"
+#include "Kalman.hpp"
 #include <opencv2/opencv.hpp>
-#include <vector>
 #include <iostream>
-#include <cstring>
-#include <MvCameraControl.h>  // 海康MVS SDK头文件
+#include <cmath>
+#include <algorithm>
 
-// 全局相机句柄，用于操作相机
-MV_CC_DEVICE_INFO_LIST stDeviceList;
-void* g_hCamera = NULL;
-
-// 海康工业相机初始化：枚举设备+打开相机+配置参数
-bool HikIndustrialCam_Init()
-{
-    // 1. 枚举所有可用工业相机(网口+USB口都支持)
-    MV_CC_EnumDevices(MV_GIGE_DEVICE | MV_USB_DEVICE, &stDeviceList);
-    if (stDeviceList.nDeviceNum == 0)
-    {
-        std::cerr << "[ERROR] 未搜索到海康工业相机！" << std::endl;
-        return false;
-    }
-    std::cout << "[INFO] 搜索到 " << stDeviceList.nDeviceNum << " 台海康工业相机" << std::endl;
-
-    // 2. 打开第一个相机（多相机可修改索引0为1/2）
-    MV_CC_CreateHandle(&g_hCamera, stDeviceList.pDeviceInfo[0]);
-    if (MV_CC_OpenDevice(g_hCamera) != MV_OK)
-    {
-        std::cerr << "[ERROR] 打开海康工业相机失败！" << std::endl;
-        return false;
-    }
-
-    // 3. 关键配置：设置触发模式为连续取流（关闭软触发，工业相机必配）
-    if (MV_CC_SetEnumValue(g_hCamera, "TriggerMode", MV_TRIGGER_MODE_OFF) != MV_OK)
-    {
-        std::cerr << "[WARNING] 设置连续取流失败，继续运行" << std::endl;
-        // 这里改成警告，不报error，防止部分相机不支持该指令导致退出
-    }
-
-    // 4. 开始取流
-    if (MV_CC_StartGrabbing(g_hCamera) != MV_OK)
-    {
-        std::cerr << "[ERROR] 相机开始取流失败！" << std::endl;
-        return false;
-    }
-    std::cout << "[INFO] 海康工业相机初始化成功，已开始取流" << std::endl;
-    return true;
-}
-
-// 从海康工业相机获取一帧图像，转换为OpenCV可用Mat格式 ✅ 全版本通用，无成员报错
-bool HikIndustrialCam_GetFrame(cv::Mat& frame)
-{
-    if (g_hCamera == NULL) return false;
-
-    MV_FRAME_OUT_INFO_EX stFrameInfo;
-    memset(&stFrameInfo, 0, sizeof(MV_FRAME_OUT_INFO_EX));
-    // 分配足够大的缓存，适配所有分辨率，无需任何获取缓存接口，杜绝报错
-    unsigned int buffer_size = 2048 * 2048 * 3; // 足够1080P/2K相机使用
-    unsigned char *pData = new unsigned char[buffer_size];
-    if(pData == NULL) return false;
-
-    // 核心取流接口，参数完全正确，编译通过的版本
-    int nRet = MV_CC_GetOneFrameTimeout(g_hCamera, pData, buffer_size, &stFrameInfo, 1000);
-    if (nRet != MV_OK || stFrameInfo.nFrameLen <= 0 || stFrameInfo.nWidth<=0 || stFrameInfo.nHeight<=0)
-    {
-        delete[] pData;
-        return false;
-    }
-
-    // ============ 重点修复：全格式兼容的图像转换，海康相机所有格式都适配 ============
-    cv::Mat img_src;
-    // 先构建原始图像Mat，不管什么格式，先拿到有效图像
-    img_src = cv::Mat(stFrameInfo.nHeight, stFrameInfo.nWidth, CV_8UC1, pData);
-    // 格式转换：兼容海康相机所有主流Bayer格式 + BGR8 + 灰度图
-    if (stFrameInfo.enPixelType == PixelType_Gvsp_BayerRG8)
-    {
-        cv::cvtColor(img_src, frame, cv::COLOR_BayerRG2BGR);
-    }
-    else if (stFrameInfo.enPixelType == PixelType_Gvsp_BayerBG8)
-    {
-        cv::cvtColor(img_src, frame, cv::COLOR_BayerBG2BGR);
-    }
-    else if (stFrameInfo.enPixelType == PixelType_Gvsp_BayerGR8)
-    {
-        cv::cvtColor(img_src, frame, cv::COLOR_BayerGR2BGR);
-    }
-    else if (stFrameInfo.enPixelType == PixelType_Gvsp_BayerGB8)
-    {
-        cv::cvtColor(img_src, frame, cv::COLOR_BayerGB2BGR);
-    }
-    else if (stFrameInfo.enPixelType == PixelType_Gvsp_BGR8_Packed)
-    {
-        frame = cv::Mat(stFrameInfo.nHeight, stFrameInfo.nWidth, CV_8UC3, pData);
-    }
-    else
-    {
-        // 兜底：不管什么格式，都转成RGB显示，绝对不会空
-
-        cv::cvtColor(img_src, frame, cv::COLOR_GRAY2BGR);
-    }
-
-    // ============ 强制兜底：确保图像非空 ============
-    if(frame.empty())
-    {
-        frame = img_src.clone();
-        cv::cvtColor(frame, frame, cv::COLOR_GRAY2BGR);
-    }
-
-    if(frame.empty() || frame.data == nullptr)
-    {
-        std::cout << "[ERROR]图像输出无效" << std::endl;
-        delete pData;
-        return false;
-    }
-
-    return true;
-}
-
-
-// 海康工业相机释放资源
-void HikIndustrialCam_Release()
-{
-    if (g_hCamera == NULL) return;
-    MV_CC_StopGrabbing(g_hCamera);
-    MV_CC_CloseDevice(g_hCamera);
-    MV_CC_DestroyHandle(g_hCamera);
-    g_hCamera = NULL;
-    std::cout << "[INFO] 海康工业相机资源已释放" << std::endl;
-}
-
-void drawFriend(ArmorsDetector& detector, cv::Mat& mask, const std::vector<Light> &lights, const std::vector<Armors> &armors)
-{
-    detector.draw(mask, lights, armors);
-}
-
-// 程序入口函数
-int main() 
-{
-    cv::setNumThreads(1);
-    cv::setUseOptimized(true);
-
-    // 1. 初始化海康工业相机（优先级最高）
-    if (!HikIndustrialCam_Init())
-    {
-        std::cerr << "相机初始化失败，程序退出！" << std::endl;
-        return -1;
-    }
-
-    // 2. 读取相机内参（原有逻辑保留）
+void drawTrack(cv::Mat& img, const Armors& detected_armor, 
+               const cv::Point3f& predict_position, double predict_yaw,
+               const cv::Mat& last_valid_rvec) {
+    
+    // 定义相机内参和畸变系数
     cv::Mat camera_matrix, dist_coeffs;
+    
+    cv::FileStorage fs("src/calib_result.yml", cv::FileStorage::READ);
+    if (!fs.isOpened()) {
+        std::cout << "[ERROR] 无法打开calib_result.yml" << std::endl;
+        return;
+    }
+    fs["cameraMatrix"] >> camera_matrix;
+    fs["distCoeffs"] >> dist_coeffs;
+    fs.release();
+    
+    // 定义装甲板三维参考点
+    const float armorWidth = 0.141f;
+    const float armorHeight = 0.125f;
+    std::vector<cv::Point3f> armor_3d_points;
+    armor_3d_points.emplace_back(-armorWidth/2, armorHeight/2, 0.0f);
+    armor_3d_points.emplace_back( armorWidth/2, armorHeight/2, 0.0f);
+    armor_3d_points.emplace_back( armorWidth/2, -armorHeight/2, 0.0f);
+    armor_3d_points.emplace_back(-armorWidth/2, -armorHeight/2, 0.0f);
+    
+    // ========== 绘制检测轮廓（红色）==========
+    if (!detected_armor.rvec.empty() && !detected_armor.tvec.empty()) {
+        std::vector<cv::Point2f> detected_points;
+        cv::projectPoints(armor_3d_points, detected_armor.rvec, detected_armor.tvec, 
+                         camera_matrix, dist_coeffs, detected_points);
+        
+        std::vector<cv::Point> detected_points_int;
+        for (const auto& p : detected_points) {
+            detected_points_int.emplace_back(cvRound(p.x), cvRound(p.y));
+        }
+        
+        if (detected_points_int.size() == 4) {
+            cv::polylines(img, detected_points_int, true, cv::Scalar(0, 0, 255), 2);
+        }
+    }
+    
+    // ========== 绘制预测轮廓（绿色）==========
+    
+    // 选择 rvec（优先用检测的姿态）
+    cv::Mat rvec;
+    if (!detected_armor.rvec.empty()) {
+        rvec = detected_armor.rvec.clone();
+    } else if (!last_valid_rvec.empty()) {
+        rvec = last_valid_rvec.clone();
+    } else {
+        // 无任何历史：用预测的 yaw 构造 rvec
+        cv::Mat rot_mat = cv::Mat::zeros(3, 3, CV_64F);
+        rot_mat.at<double>(0, 0) = cos(predict_yaw);
+        rot_mat.at<double>(0, 1) = -sin(predict_yaw);
+        rot_mat.at<double>(1, 0) = sin(predict_yaw);
+        rot_mat.at<double>(1, 1) = cos(predict_yaw);
+        rot_mat.at<double>(2, 2) = 1.0;
+        cv::Rodrigues(rot_mat, rvec);
+    }
+    
+    // 强制使用预测的 tvec
+    cv::Mat tvec = (cv::Mat_<double>(3, 1) << 
+                   static_cast<double>(predict_position.x),
+                   static_cast<double>(predict_position.y),
+                   static_cast<double>(predict_position.z));
+    
+    // 兜底：限制深度
+    if (tvec.at<double>(2) < 0.5) {
+        tvec.at<double>(2) = 0.5;
+    }
+    
+    // 投影预测的3D点到2D
+    std::vector<cv::Point2f> predict_image_points;
+    cv::projectPoints(armor_3d_points, rvec, tvec, camera_matrix, dist_coeffs, predict_image_points);
+    
+    std::vector<cv::Point> predict_image_points_int;
+    for (const auto& p : predict_image_points) {
+        predict_image_points_int.emplace_back(cvRound(p.x), cvRound(p.y));
+    }
+    
+    if (predict_image_points_int.size() == 4) {
+        cv::polylines(img, predict_image_points_int, true, cv::Scalar(0, 255, 0), 2);
+    }
+    
+    // 绘制预测位置中心点（青色十字）
+    std::vector<cv::Point2f> center_projected_vec;
+    std::vector<cv::Point3f> center_3d = {cv::Point3f(0, 0, 0)};
+    cv::projectPoints(center_3d, rvec, tvec, camera_matrix, dist_coeffs, center_projected_vec);
+
+    if (!center_projected_vec.empty()) {
+        cv::Point center_int(cvRound(center_projected_vec[0].x), cvRound(center_projected_vec[0].y));
+        cv::drawMarker(img, center_int, cv::Scalar(255, 255, 0), cv::MARKER_CROSS, 20, 2);
+    }
+    
+    // 显示滤波后坐标
+    char text1[100];
+    snprintf(text1, sizeof(text1), "Predict: (%.2f, %.2f, %.2f)", 
+             predict_position.x, predict_position.y, predict_position.z);
+    cv::putText(img, text1, cv::Point(10, 30), cv::FONT_HERSHEY_SIMPLEX, 0.5, 
+                cv::Scalar(255, 255, 255), 2);
+    
+    char text2[100];
+    snprintf(text2, sizeof(text2), "Predict Yaw: %.2f deg", predict_yaw);
+    cv::putText(img, text2, cv::Point(10, 60), cv::FONT_HERSHEY_SIMPLEX, 0.5, 
+                cv::Scalar(255, 255, 255), 2);
+}
+
+
+
+int main()
+{
+    // 定义相机内参和畸变系数
+    cv::Mat camera_matrix, dist_coeffs;
+
+    //读取文件
     cv::FileStorage fs("src/calib_result.yml", cv::FileStorage::READ);
     if (!fs.isOpened())
     {
-        std::cout << "[WARNING] 无法打开calib_result.yml,位姿解算可能异常" << std::endl;
-        // 此处可加默认内参，避免程序退出
-        camera_matrix = (cv::Mat_<double>(3,3) << 1000,0,640, 0,1000,360, 0,0,1);
-        dist_coeffs = cv::Mat::zeros(5,1,CV_64F);
+        // 修复：cout << 正确写法
+        std::cout << "[ERROR] 无法打开calib_result.yml" << std::endl;
+        return -1;
     }
-    else
-    {
-        fs["cameraMatrix"] >> camera_matrix;
-        fs["distCoeffs"] >> dist_coeffs;
-        fs.release();
-    }
+    fs["cameraMatrix"] >> camera_matrix;
+    fs["distCoeffs"] >> dist_coeffs;
+    fs.release();
+
     if (camera_matrix.empty() || camera_matrix.rows != 3 || camera_matrix.cols != 3) {
-        std::cout << "[WARNING] 相机内参无效，使用默认内参" << std::endl;
-        camera_matrix = (cv::Mat_<double>(3,3) << 1000,0,640, 0,1000,360, 0,0,1);
-        dist_coeffs = cv::Mat::zeros(5,1,CV_64F);
+        std::cout << "PnPSolver::solve: 无效的相机内参，跳过位姿求解" << std::endl;
+        return -1;
     }
 
-    // 3. 初始化装甲板检测器
     ArmorsDetector armorsdetector(camera_matrix, dist_coeffs);
- 
-    cv::Mat frame, mask;
-    std::vector<Armors> armors;
-    std::vector<Light> lights;
 
-    // 4. 循环取流+检测+绘制 (修复后)
-    // ============ 前置初始化窗口：解决imshow黑屏核心 ============
-    cv::namedWindow("海康工业相机-装甲板检测结果", cv::WINDOW_NORMAL | cv::WINDOW_KEEPRATIO);
-    cv::resizeWindow("海康工业相机-装甲板检测结果", 1280, 720); // 固定窗口大小，防止变形
+    // 保留yaw_rate的标准Kalman初始化
+    Kalman tracker(0.033, 7.33);
+    bool inited = false;
+    cv::Point3f last_valid_position;
+    double last_valid_yaw;
+    cv::Mat last_valid_rvec; // 缓存最后一次有效完整rvec
 
-    while (true)
+    cv::VideoCapture cap("src/red1.mp4");
+    if (!cap.isOpened())
     {
+        std::cout << "视频打开失败！"; 
+        return -1;
+    }
+    
+    cv::Mat frame;
 
-        // 获取工业相机帧
-        bool get_frame_ok = HikIndustrialCam_GetFrame(frame);
-        if (!get_frame_ok || frame.empty())
+    while (cap.read(frame))
+    {
+        if (frame.empty())
         {
-            std::cerr << "获取相机帧失败，重试..." << std::endl;
-            cv::waitKey(5);
-            continue;
-        }
-        
-        // 装甲板检测（原有逻辑保留，不修改任何Detector代码）
-        try 
-        {
-            armors = armorsdetector.detect(frame);
-        } 
-        catch (const std::exception& e) 
-        {
-            std::cerr << "检测函数异常：" << e.what() << std::endl;
-            continue;
-        }
-
-        mask = frame.clone();
-        drawFriend(armorsdetector, mask, lights,  armors);
-
-        // ============ 修复显示逻辑：强制刷新+延时适配 ============
-        cv::imshow("海康工业相机-装甲板检测结果", mask);
-        // 关键：waitKey改成10，既流畅又能让opencv刷新窗口，ESC退出不变
-        int key = cv::waitKey(1) & 0xFF;
-        if (key == 27)
-        {
-            std::cout << "用户退出程序！" << std::endl;
+            std::cout << "视频播放完毕！";
             break;
         }
+        
+        if (frame.rows == 0 || frame.cols == 0)
+        {
+            std::cout << "无效的视频帧" << std::endl;
+            continue;
+        }
+
+        std::vector<Armors> armors = armorsdetector.detect(frame);
+
+        if (!armors.empty()) {
+            // 取第一个装甲板
+            Armors best_armor = armors[0];
+
+            // 位姿有效，更新历史缓存
+            cv::Point3f detect_point(
+                best_armor.tvec.at<double>(0), 
+                best_armor.tvec.at<double>(1),
+                best_armor.tvec.at<double>(2)
+            );
+            double yaw = best_armor.yaw;
+            last_valid_position = detect_point;
+            last_valid_yaw = yaw;
+            last_valid_rvec = best_armor.rvec.clone(); // 缓存有效rvec
+
+            if (!inited) {
+                tracker.init(detect_point, yaw);
+                inited = true;
+            } else {
+                tracker.predict();
+                tracker.update(detect_point, yaw);
+            }
+
+            // 输出平滑3D坐标
+            cv::Point3f predict_point = tracker.getPosition();
+            double predict_yaw = tracker.getYaw();
+
+            // 修复：调用drawTrack时传入last_valid_rvec
+            drawTrack(frame, best_armor, predict_point, predict_yaw, last_valid_rvec);
+        } else {
+            // 没有检测到装甲板，若已初始化，仅执行预测并可视化
+            if (inited) {
+                tracker.predict();
+                cv::Point3f predict_point = tracker.getPosition();
+                double predict_yaw = tracker.getYaw();
+                // 修复：调用drawTrack时传入last_valid_rvec
+                drawTrack(frame, Armors(), predict_point, predict_yaw, last_valid_rvec);
+            }
+        }
+
+        imshow("Armor Tracker", frame);
+        if (cv::waitKey(50) == 27) break;
     }
 
-
-    // 5. 资源释放（必须执行）
-    HikIndustrialCam_Release();
+    cap.release();
     cv::destroyAllWindows();
     return 0;
 }

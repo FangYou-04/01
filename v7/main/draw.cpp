@@ -65,5 +65,3 @@ void ArmorsDetector::draw(cv::Mat &mask, const std::vector<Light> &lights, const
         
     }
 }
-
-

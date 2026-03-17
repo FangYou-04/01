@@ -1,6 +1,7 @@
-main/CMakeFiles/Armor.dir/Main3.cpp.o: \
- /home/fang/++c/m/v6（新/main/Main3.cpp /usr/include/stdc-predef.h \
- /home/fang/++c/m/v6（新/include/Congfig.hpp /usr/include/c++/11/string \
+main/CMakeFiles/Armor.dir/Main2.cpp.o: \
+ /home/fang/桌面/vision01/v7/main/Main2.cpp /usr/include/stdc-predef.h \
+ /home/fang/桌面/vision01/v7/include/Congfig.hpp \
+ /usr/include/c++/11/string \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -241,7 +242,7 @@ main/CMakeFiles/Armor.dir/Main3.cpp.o: \
  /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/bits/std_mutex.h \
  /usr/include/c++/11/bits/unique_lock.h \
- /home/fang/++c/m/v6（新/include/Struct.hpp \
+ /home/fang/桌面/vision01/v7/include/Struct.hpp \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
@@ -377,7 +378,7 @@ main/CMakeFiles/Armor.dir/Main3.cpp.o: \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
- /home/fang/++c/m/v6（新/include/PoseSlove.hpp \
+ /home/fang/桌面/vision01/v7/include/PoseSlove.hpp \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
- /home/fang/++c/m/v6（新/include/Struct.hpp \
- /home/fang/++c/m/v6（新/include/Kalman.hpp
+ /home/fang/桌面/vision01/v7/include/Struct.hpp \
+ /home/fang/桌面/vision01/v7/include/Kalman.hpp

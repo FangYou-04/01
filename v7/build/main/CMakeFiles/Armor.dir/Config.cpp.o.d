@@ -1,6 +1,7 @@
 main/CMakeFiles/Armor.dir/Config.cpp.o: \
- /home/fang/++c/m/v6（新/main/Config.cpp /usr/include/stdc-predef.h \
- /home/fang/++c/m/v6（新/include/Congfig.hpp /usr/include/c++/11/string \
+ /home/fang/桌面/vision01/v7/main/Config.cpp /usr/include/stdc-predef.h \
+ /home/fang/桌面/vision01/v7/include/Congfig.hpp \
+ /usr/include/c++/11/string \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \

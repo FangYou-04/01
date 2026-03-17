@@ -1,4 +1,4 @@
-# Install script for directory: /home/fang/++c/m/v6（新
+# Install script for directory: /home/fang/桌面/vision01/v7
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/fang/++c/m/v6（新/build/main/cmake_install.cmake")
+  include("/home/fang/桌面/vision01/v7/build/main/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -55,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/fang/++c/m/v6（新/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/fang/桌面/vision01/v7/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

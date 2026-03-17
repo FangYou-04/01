@@ -1171,7 +1171,7 @@ main/CMakeFiles/Armor.dir/Kalman.cpp.o: ../main/Kalman.cpp \
   /usr/local/include/opencv4/opencv2/video/tracking.hpp \
   /usr/local/include/opencv4/opencv2/video/background_segm.hpp
 
-main/CMakeFiles/Armor.dir/Main3.cpp.o: ../main/Main3.cpp \
+main/CMakeFiles/Armor.dir/Main2.cpp.o: ../main/Main2.cpp \
   /usr/include/stdc-predef.h \
   ../include/Congfig.hpp \
   /usr/include/c++/11/string \
@@ -2532,6 +2532,8 @@ main/CMakeFiles/Armor.dir/draw.cpp.o: ../main/draw.cpp \
 
 ../main/PoseSlove.cpp:
 
+../main/Main2.cpp:
+
 ../include/Kalman.hpp:
 
 ../main/Kalman.cpp:
@@ -2937,8 +2939,6 @@ main/CMakeFiles/Armor.dir/draw.cpp.o: ../main/draw.cpp \
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/c++/11/ext/type_traits.h:
-
-../main/Main3.cpp:
 
 /usr/local/include/opencv4/opencv2/core/cuda.inl.hpp:
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/fang/++c/m/v6（新/main
+# Install script for directory: /home/fang/桌面/vision01/v7/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

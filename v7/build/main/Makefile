@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fang/++c/m/v6（新
+CMAKE_SOURCE_DIR = /home/fang/桌面/vision01/v7
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fang/++c/m/v6（新/build
+CMAKE_BINARY_DIR = /home/fang/桌面/vision01/v7/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/fang/++c/m/v6（新/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/fang/++c/m/v6（新/build/CMakeFiles /home/fang/++c/m/v6（新/build/main//CMakeFiles/progress.marks
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fang/++c/m/v6（新/build/CMakeFiles 0
+	cd /home/fang/桌面/vision01/v7/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/fang/桌面/vision01/v7/build/CMakeFiles /home/fang/桌面/vision01/v7/build/main//CMakeFiles/progress.marks
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fang/桌面/vision01/v7/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/clean
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/preinstall
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/preinstall
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/fang/++c/m/v6（新/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/fang/桌面/vision01/v7/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 main/CMakeFiles/Armor.dir/rule:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/CMakeFiles/Armor.dir/rule
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main/CMakeFiles/Armor.dir/rule
 .PHONY : main/CMakeFiles/Armor.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ Armor: main/CMakeFiles/Armor.dir/rule
 
 # fast build rule for target.
 Armor/fast:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/build
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/build
 .PHONY : Armor/fast
 
 Armors.o: Armors.cpp.o
@@ -135,7 +135,7 @@ Armors.o: Armors.cpp.o
 
 # target to build an object file
 Armors.cpp.o:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Armors.cpp.o
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Armors.cpp.o
 .PHONY : Armors.cpp.o
 
 Armors.i: Armors.cpp.i
@@ -143,7 +143,7 @@ Armors.i: Armors.cpp.i
 
 # target to preprocess a source file
 Armors.cpp.i:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Armors.cpp.i
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Armors.cpp.i
 .PHONY : Armors.cpp.i
 
 Armors.s: Armors.cpp.s
@@ -151,7 +151,7 @@ Armors.s: Armors.cpp.s
 
 # target to generate assembly for a file
 Armors.cpp.s:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Armors.cpp.s
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Armors.cpp.s
 .PHONY : Armors.cpp.s
 
 Config.o: Config.cpp.o
@@ -159,7 +159,7 @@ Config.o: Config.cpp.o
 
 # target to build an object file
 Config.cpp.o:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Config.cpp.o
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Config.cpp.o
 .PHONY : Config.cpp.o
 
 Config.i: Config.cpp.i
@@ -167,7 +167,7 @@ Config.i: Config.cpp.i
 
 # target to preprocess a source file
 Config.cpp.i:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Config.cpp.i
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Config.cpp.i
 .PHONY : Config.cpp.i
 
 Config.s: Config.cpp.s
@@ -175,7 +175,7 @@ Config.s: Config.cpp.s
 
 # target to generate assembly for a file
 Config.cpp.s:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Config.cpp.s
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Config.cpp.s
 .PHONY : Config.cpp.s
 
 Kalman.o: Kalman.cpp.o
@@ -183,7 +183,7 @@ Kalman.o: Kalman.cpp.o
 
 # target to build an object file
 Kalman.cpp.o:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Kalman.cpp.o
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Kalman.cpp.o
 .PHONY : Kalman.cpp.o
 
 Kalman.i: Kalman.cpp.i
@@ -191,7 +191,7 @@ Kalman.i: Kalman.cpp.i
 
 # target to preprocess a source file
 Kalman.cpp.i:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Kalman.cpp.i
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Kalman.cpp.i
 .PHONY : Kalman.cpp.i
 
 Kalman.s: Kalman.cpp.s
@@ -199,39 +199,39 @@ Kalman.s: Kalman.cpp.s
 
 # target to generate assembly for a file
 Kalman.cpp.s:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Kalman.cpp.s
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Kalman.cpp.s
 .PHONY : Kalman.cpp.s
 
-Main3.o: Main3.cpp.o
-.PHONY : Main3.o
+Main2.o: Main2.cpp.o
+.PHONY : Main2.o
 
 # target to build an object file
-Main3.cpp.o:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main3.cpp.o
-.PHONY : Main3.cpp.o
+Main2.cpp.o:
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main2.cpp.o
+.PHONY : Main2.cpp.o
 
-Main3.i: Main3.cpp.i
-.PHONY : Main3.i
+Main2.i: Main2.cpp.i
+.PHONY : Main2.i
 
 # target to preprocess a source file
-Main3.cpp.i:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main3.cpp.i
-.PHONY : Main3.cpp.i
+Main2.cpp.i:
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main2.cpp.i
+.PHONY : Main2.cpp.i
 
-Main3.s: Main3.cpp.s
-.PHONY : Main3.s
+Main2.s: Main2.cpp.s
+.PHONY : Main2.s
 
 # target to generate assembly for a file
-Main3.cpp.s:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main3.cpp.s
-.PHONY : Main3.cpp.s
+Main2.cpp.s:
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main2.cpp.s
+.PHONY : Main2.cpp.s
 
 PoseSlove.o: PoseSlove.cpp.o
 .PHONY : PoseSlove.o
 
 # target to build an object file
 PoseSlove.cpp.o:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/PoseSlove.cpp.o
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/PoseSlove.cpp.o
 .PHONY : PoseSlove.cpp.o
 
 PoseSlove.i: PoseSlove.cpp.i
@@ -239,7 +239,7 @@ PoseSlove.i: PoseSlove.cpp.i
 
 # target to preprocess a source file
 PoseSlove.cpp.i:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/PoseSlove.cpp.i
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/PoseSlove.cpp.i
 .PHONY : PoseSlove.cpp.i
 
 PoseSlove.s: PoseSlove.cpp.s
@@ -247,7 +247,7 @@ PoseSlove.s: PoseSlove.cpp.s
 
 # target to generate assembly for a file
 PoseSlove.cpp.s:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/PoseSlove.cpp.s
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/PoseSlove.cpp.s
 .PHONY : PoseSlove.cpp.s
 
 draw.o: draw.cpp.o
@@ -255,7 +255,7 @@ draw.o: draw.cpp.o
 
 # target to build an object file
 draw.cpp.o:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/draw.cpp.o
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/draw.cpp.o
 .PHONY : draw.cpp.o
 
 draw.i: draw.cpp.i
@@ -263,7 +263,7 @@ draw.i: draw.cpp.i
 
 # target to preprocess a source file
 draw.cpp.i:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/draw.cpp.i
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/draw.cpp.i
 .PHONY : draw.cpp.i
 
 draw.s: draw.cpp.s
@@ -271,7 +271,7 @@ draw.s: draw.cpp.s
 
 # target to generate assembly for a file
 draw.cpp.s:
-	cd /home/fang/++c/m/v6（新/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/draw.cpp.s
+	cd /home/fang/桌面/vision01/v7/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/draw.cpp.s
 .PHONY : draw.cpp.s
 
 # Help Target
@@ -292,9 +292,9 @@ help:
 	@echo "... Kalman.o"
 	@echo "... Kalman.i"
 	@echo "... Kalman.s"
-	@echo "... Main3.o"
-	@echo "... Main3.i"
-	@echo "... Main3.s"
+	@echo "... Main2.o"
+	@echo "... Main2.i"
+	@echo "... Main2.s"
 	@echo "... PoseSlove.o"
 	@echo "... PoseSlove.i"
 	@echo "... PoseSlove.s"
@@ -312,6 +312,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/fang/++c/m/v6（新/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/fang/桌面/vision01/v7/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
