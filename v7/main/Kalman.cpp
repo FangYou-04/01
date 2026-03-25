@@ -41,6 +41,7 @@ Kalman::Kalman(double dt, double angular_velocity) : dt_(dt), angular_velocity_(
     Q.at<double>(7, 7) = 5e-2;   // yaw_rate 角速度噪声（变化较大）
     kf_.processNoiseCov = Q;
     
+    // 测量噪声参数
     cv::Mat R = cv::Mat::zeros(4, 4, CV_64F);
     R.at<double>(0, 0) = 1e-3;   // x 测量噪声
     R.at<double>(1, 1) = 1e-3;   // y 测量噪声
@@ -64,7 +65,7 @@ void Kalman::init(const cv::Point3f& position, double yaw)
     state_.at<double>(3) = 0.0;  // vx
     state_.at<double>(4) = 0.0;  // vy
     state_.at<double>(5) = 0.0;  // vz
-    state_.at<double>(7) = angular_velocity_;  // yaw_rate
+    state_.at<double>(7) = angular_velocity_;  // ya/* code */w_rate
     
     last_position_ = position;  // 记录初始位置
     kf_.statePost = state_.clone();  // 将初始状态设置为后验状态

@@ -30,11 +30,21 @@ struct ArmorConfig
     double armor_ratio_max;
 };
 
+struct KalmanConfig
+{
+    float processNoisePos;
+    float processNoiseVel;
+    float measurementNoisePos;
+    float initialErrorCov;
+};
+
+
 struct AppConfig
 {
     MorphConfig morph_config;
     LightConfig light_config;
     ArmorConfig armor_config;
+    KalmanConfig kalman;
 };
 
 namespace YAML
@@ -118,6 +128,31 @@ namespace YAML
     };  
 
     template<>
+    struct convert<KalmanConfig>
+    {
+        static Node encode(const KalmanConfig& rhs)
+        {
+            Node node;
+            node["processNoisePos"] = rhs.processNoisePos;
+            node["processNoiseVel"] = rhs.processNoiseVel;
+            node["measurementNoisePos"] = rhs.measurementNoisePos;
+            node["initialErrorCov"] = rhs.initialErrorCov;
+            return node;
+        }
+
+        static bool decode(const Node& node, KalmanConfig& rhs)
+        {
+            if(!node.IsMap() || !node["processNoisePos"] || !node["processNoiseVel"] || !node["measurementNoisePos"] || !node["initialErrorCov"])
+                return false;
+            rhs.processNoisePos = node["processNoisePos"].as<float>();
+            rhs.processNoiseVel = node["processNoiseVel"].as<float>();
+            rhs.measurementNoisePos = node["measurementNoisePos"].as<float>();
+            rhs.initialErrorCov = node["initialErrorCov"].as<float>();
+            return true;
+        }
+    };
+
+    template<>
     struct convert<AppConfig>
     {
         static Node encode(const AppConfig& rhs)
@@ -126,6 +161,7 @@ namespace YAML
             node["morph_config"] = rhs.morph_config;
             node["light_config"] = rhs.light_config;
             node["armor_config"] = rhs.armor_config;
+            node["kalman"] = rhs.kalman;
             return node;
         }
 
@@ -136,6 +172,7 @@ namespace YAML
             rhs.morph_config = node["morph_config"].as<MorphConfig>();
             rhs.light_config = node["light_config"].as<LightConfig>();
             rhs.armor_config = node["armor_config"].as<ArmorConfig>();
+            rhs.kalman = node["kalman"].as<KalmanConfig>();
             return true;
         }
     };  

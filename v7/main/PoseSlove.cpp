@@ -173,6 +173,10 @@ bool ArmorsDetector::solveArmorPose(Armors& armor)
     armor.rvec = rvec.clone();
     armor.tvec = tvec.clone();
 
+    // 18. 输出最终结果
+    std::cout << "最终结果: 距离=" << armor.distance << "m, "
+              << "pitch=" << pitch << "°, yaw=" << yaw << "°, roll=" << roll << "°" << std::endl;
+
     return true;
 }
 

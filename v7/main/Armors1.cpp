@@ -22,16 +22,19 @@ cv::Mat ArmorsDetector::preprocessImage(const cv::Mat &img)
     // 亮度调整（用户可能设置 beta 为负值，例如 -50）
     cv::Mat img_L;
     int beta = -100; // 如果要测试不同亮度请修改此处
-    img_continuous.convertTo(img_L, -1, 1, beta);
+    img_continuous.convertTo(img_L, -1, 1.0, beta);
 
-   cv::Mat gray, blur, binary;
+    cv::Mat gray, binary;
     cv::cvtColor(img_L, gray, cv::COLOR_BGR2GRAY);
-    cv::GaussianBlur(gray, blur, cv::Size(5, 5), 0); // 在灰度图阶段模糊，减少噪声
-    cv::threshold(blur, binary, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
 
+    cv::threshold(gray, binary, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
+
+    // 形态学操作
     cv::Mat kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(config_.morph_config.kernel_size, config_.morph_config.kernel_size));
     cv::Mat img_N;
-    cv::morphologyEx(binary, img_N, cv::MORPH_OPEN, kernel); // 直接对二值图形态学操作
+    cv::GaussianBlur(binary, img_N, cv::Size(5, 5), 0); // 可选：先进行高斯模糊，减少噪声对形态学的影响
+    cv::morphologyEx(img_N, img_N, cv::MORPH_OPEN, kernel);
+
     cv::imshow("二值化", img_N);
 
     return img_N;
