@@ -14,15 +14,12 @@ int main()
     cv::setNumThreads(0);
     cv::setUseOptimized(false);
     
-    //读取文件
-
-    // 定义相机内参和畸变系数
+    // 读取相机内参和畸变系数
     cv::Mat camera_matrix, dist_coeffs;
 
     cv::FileStorage fs("src/calib_result.yml", cv::FileStorage::READ);
     if (!fs.isOpened())
     {
-        // 修复：cout << 正确写法
         std::cout << "[ERROR] 无法打开calib_result.yml" << std::endl;
         return -1;
     }
@@ -38,15 +35,15 @@ int main()
     // 检测器
     ArmorsDetector armorsdetector(camera_matrix, dist_coeffs);
 
-    // 卡尔曼追踪
-    Kalman tracker(0.033, 7.33);
+    // 卡尔曼追踪（使用 KalmanTracker）
+    KalmanTracker tracker;          // 无参构造，参数从配置文件加载
     bool inited = false;
 
     cv::Point3f last_valid_position; 
     double last_valid_yaw;           
     cv::Mat last_valid_rvec;         
 
-    // 视频.ver
+    // 视频读取
     cv::VideoCapture cap("src/red1.mp4");
     if (!cap.isOpened())
     {
@@ -54,7 +51,7 @@ int main()
         return -1;
     }
     
-    // // 海康工业相机.ver
+    // // 海康工业相机
     // HikCamera cam;
     // if (!cam.init())
     // {
@@ -62,12 +59,15 @@ int main()
     // }
 
     cv::namedWindow("Armor Tracker", cv::WINDOW_NORMAL | cv::WINDOW_KEEPRATIO);
-    cv::resizeWindow("Armor Tracker", 1280, 720); // 固定窗口大小
+    cv::resizeWindow("Armor Tracker", 1280, 720);
     
     cv::Mat frame;
+    double timestamp = 0.0;      // 模拟时间戳，可根据实际帧率或系统时间设置
+    const double dt = 0.033;     // 假设30fps
+
     while (true)
     {
-        // 【视频取流】
+        // 视频取流
         if (!cap.read(frame))
         {
             break;
@@ -83,6 +83,8 @@ int main()
         {
             continue;
         }
+        
+        timestamp += dt;   // 模拟时间戳递增
         
         std::vector<Armors> armors = armorsdetector.detect(frame);
 
@@ -104,31 +106,28 @@ int main()
 
             if (!inited)
             {
-                tracker.init(pos, yaw);
+                tracker.init(pos, timestamp);   // 使用时间戳初始化
                 inited = true;
             }
             else
             {
-                tracker.predict();
-                tracker.update(pos, yaw);
+                tracker.predicted(timestamp);   // 预测
+                tracker.update(pos, timestamp); // 更新
             }
 
-            cv::Point3f pred_pos = tracker.getPosition();
-            double pred_yaw = tracker.getYaw();
+            cv::Point3f est_pos = tracker.getEstimatedPosition(); // 获取滤波后位置
+            double pred_yaw = last_valid_yaw;   // 注意：KalmanTracker 未处理 yaw，此处沿用检测值
 
-            // 修正：传入检测到的装甲板，而不是空对象
-            drawTrack(frame, best, pred_pos, pred_yaw, 
+            drawTrack(frame, best, est_pos, pred_yaw, 
                       last_valid_rvec, camera_matrix, dist_coeffs);
         } 
         else
         {
             if (inited)
             {
-                tracker.predict();
-                cv::Point3f pred_pos = tracker.getPosition();
-                double pred_yaw = tracker.getYaw();
+                cv::Point3f est_pos = tracker.predicted(timestamp); // 仅预测
 
-                drawTrack(frame, Armors(), pred_pos, pred_yaw, 
+                drawTrack(frame, Armors(), est_pos, last_valid_yaw, 
                           last_valid_rvec, camera_matrix, dist_coeffs);
             }
         }

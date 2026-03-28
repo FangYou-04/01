@@ -1,3 +1,3 @@
-/home/fang/c/标定/build/CMakeFiles/HikCameraCalib.dir
-/home/fang/c/标定/build/CMakeFiles/edit_cache.dir
-/home/fang/c/标定/build/CMakeFiles/rebuild_cache.dir
+/home/fang/桌面/vision01/标定/build/CMakeFiles/HikCameraCalib.dir
+/home/fang/桌面/vision01/标定/build/CMakeFiles/edit_cache.dir
+/home/fang/桌面/vision01/标定/build/CMakeFiles/rebuild_cache.dir

@@ -19,7 +19,7 @@ armor_config:
   armor_ratio_max: 4
 
 kalman:
-  processNoisePos: 0.001
-  processNoiseVel: 1.5
-  measurementNoisePos: 0.01
-  initialErrorCov: 1.0
+  processNoisePos: 1
+  processNoiseVel: 1000
+  measurementNoisePos: 0
+  initialErrorCov: 5

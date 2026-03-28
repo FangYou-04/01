@@ -36,9 +36,9 @@ Kalman::Kalman(double dt, double angular_velocity) : dt_(dt), angular_velocity_(
     Q.at<double>(2, 2) = 5e-3;   // z 位置噪声（高度更稳定）
     Q.at<double>(3, 3) = 1e-2;   // vx 速度噪声
     Q.at<double>(4, 4) = 1e-2;   // vy 速度噪声
-    Q.at<double>(5, 5) = 5e-3;   // vz 速度噪声
-    Q.at<double>(6, 6) = 5e-2;   // yaw 角度噪声
-    Q.at<double>(7, 7) = 5e-2;   // yaw_rate 角速度噪声（变化较大）
+    Q.at<double>(5, 5) = 1e-3;   // vz 速度噪声
+    Q.at<double>(6, 6) = 1e-2;   // yaw 角度噪声
+    Q.at<double>(7, 7) = 1e-2;   // yaw_rate 角速度噪声（变化较大）
     kf_.processNoiseCov = Q;
     
     // 测量噪声参数
@@ -50,7 +50,7 @@ Kalman::Kalman(double dt, double angular_velocity) : dt_(dt), angular_velocity_(
     kf_.measurementNoiseCov = R;
     
     // 后验错误协方差矩阵P
-    cv::setIdentity(kf_.errorCovPost, cv::Scalar::all(1e-3));
+    cv::setIdentity(kf_.errorCovPost, cv::Scalar::all(1));
 }
 
 // 初始化滤波器状态

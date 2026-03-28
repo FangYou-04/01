@@ -1,5 +1,6 @@
-CMakeFiles/HikCameraCalib.dir/main.cpp.o: /home/fang/c/标定/main.cpp \
- /usr/include/stdc-predef.h /usr/local/include/opencv4/opencv2/opencv.hpp \
+CMakeFiles/HikCameraCalib.dir/main.cpp.o: \
+ /home/fang/桌面/vision01/标定/main.cpp /usr/include/stdc-predef.h \
+ /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
  /usr/local/include/opencv4/opencv2/core/cvdef.h \

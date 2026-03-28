@@ -11,10 +11,10 @@ KalmanTracker::KalmanTracker()
 {
     // 观测矩阵 H(3 * 6)
     // 仅观测位置而不直接观测速度
-    m_kf.measurementMartix = cv::Mat::zeros(3, 6, CV_32F);
-    m_kf.measurementMartix.at<float>(0, 0) = 1.0f;
-    m_kf.measurementMartix.at<float>(1, 1) = 1.0f;
-    m_kf.measurementMartix.at<float>(2, 2) = 1.0f;
+    m_kf.measurementMatrix = cv::Mat::zeros(3, 6, CV_32F);
+    m_kf.measurementMatrix.at<float>(0, 0) = 1.0f;
+    m_kf.measurementMatrix.at<float>(1, 1) = 1.0f;
+    m_kf.measurementMatrix.at<float>(2, 2) = 1.0f;
 
     loadParamInConfig();
 }
@@ -38,7 +38,7 @@ void KalmanTracker::loadParamInConfig()
 }
 
 // 卡尔曼匀速模型形态转移矩阵
-void KalmanTracker::setTransitionMartix(double dt)
+void KalmanTracker::setTransitionMatrix(double dt)
 {
     cv::Mat& F = m_kf.transitionMatrix;
     cv::setIdentity(F);
@@ -65,7 +65,7 @@ void KalmanTracker::init(const cv::Point3f& position, double timeStamp)
 }
 
 // 预测函数
-void KalmanTracker::predicted(double timeStamp)
+cv::Point3f KalmanTracker::predicted(double timeStamp)
 {
     if (!m_initialized)
     {
@@ -89,14 +89,14 @@ void KalmanTracker::predicted(double timeStamp)
 
     // 提取预测位置
     m_predictedPose.x = m_state.at<float>(0);
-    m_predictedPose.y = m_state.ar<float>(1);
+    m_predictedPose.y = m_state.at<float>(1);
     m_predictedPose.z = m_state.at<float>(2);
 
     return m_predictedPose;
 }
 
 // 更新，预测后校正
-void KalmanTracker::update(const cv::Point3f measuredPos, double timeStamp)
+cv::Point3f KalmanTracker::update(const cv::Point3f measuredPos, double timeStamp)
 {
     // 初始化
     if (!m_initialized)
@@ -106,7 +106,7 @@ void KalmanTracker::update(const cv::Point3f measuredPos, double timeStamp)
     }
 
     // 预测步
-    predict(timeStamp);
+    predicted(timeStamp);
 
     // 构造观测向量
     m_measured = cv::Mat::zeros(3, 1, CV_32F);

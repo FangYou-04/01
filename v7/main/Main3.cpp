@@ -46,20 +46,20 @@ int main()
     double last_valid_yaw;           
     cv::Mat last_valid_rvec;         
 
-    // // 视频.ver
-    // cv::VideoCapture cap("src/red1.mp4");
-    // if (!cap.isOpened())
-    // {
-    //     std::cerr << "视频打开失败" << std::endl;
-    //     return -1;
-    // }
-    
-    // 海康工业相机.ver
-    HikCamera cam;
-    if (!cam.init())
-    {
+    // 视频.ver
+    cv::VideoCapture cap("src/red1.mp4");
+    if (!cap.isOpened())
+    { 
+        std::cerr << "视频打开失败" << std::endl;
         return -1;
     }
+    
+    // // 海康工业相机.ver
+    // HikCamera cam;
+    // if (!cam.init())
+    // {
+    //     return -1;
+    // }
 
     cv::namedWindow("Armor Tracker", cv::WINDOW_NORMAL | cv::WINDOW_KEEPRATIO);
     cv::resizeWindow("Armor Tracker", 1280, 720); // 固定窗口大小
@@ -67,17 +67,17 @@ int main()
     cv::Mat frame;
     while (true)
     {
-        // // 【视频取流】
-        // if (!cap.read(frame))
-        // {
-        //     break;
-        // }
-        
-        // 海康工业取流
-        if (!cam.getFrame(frame))
+        // 【视频取流】
+        if (!cap.read(frame))
         {
-            continue;
+            break;
         }
+        
+        // // 海康工业取流
+        // if (!cam.getFrame(frame))
+        // {
+        //     continue;
+        // }
         
         if (frame.empty())
         {
@@ -140,8 +140,8 @@ int main()
         }
     }
 
-    // cap.release();
-    cam.release();
+    cap.release();
+    // cam.release();
     cv::destroyAllWindows();
     return 0;
 }

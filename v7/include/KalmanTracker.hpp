@@ -18,7 +18,7 @@ public:
 
 private:
     void loadParamInConfig();
-    void setTransitionMartix(double dt);
+    void setTransitionMatrix(double dt);
 
 private:
     cv::KalmanFilter m_kf;

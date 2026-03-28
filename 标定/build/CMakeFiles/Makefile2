@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fang/c/标定
+CMAKE_SOURCE_DIR = /home/fang/桌面/vision01/标定
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fang/c/标定/build
+CMAKE_BINARY_DIR = /home/fang/桌面/vision01/标定/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -81,14 +81,14 @@ clean: CMakeFiles/HikCameraCalib.dir/clean
 CMakeFiles/HikCameraCalib.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HikCameraCalib.dir/build.make CMakeFiles/HikCameraCalib.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HikCameraCalib.dir/build.make CMakeFiles/HikCameraCalib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fang/c/标定/build/CMakeFiles --progress-num=1,2 "Built target HikCameraCalib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/fang/桌面/vision01/标定/build/CMakeFiles --progress-num=1,2 "Built target HikCameraCalib"
 .PHONY : CMakeFiles/HikCameraCalib.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/HikCameraCalib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fang/c/标定/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fang/桌面/vision01/标定/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/HikCameraCalib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fang/c/标定/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fang/桌面/vision01/标定/build/CMakeFiles 0
 .PHONY : CMakeFiles/HikCameraCalib.dir/rule
 
 # Convenience name for target.

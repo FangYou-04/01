@@ -21,7 +21,7 @@ cv::Mat ArmorsDetector::preprocessImage(const cv::Mat &img)
 
     // 亮度调整（用户可能设置 beta 为负值，例如 -50）
     cv::Mat img_L;
-    int beta = -100; // 如果要测试不同亮度请修改此处
+    int beta = -90; // 如果要测试不同亮度请修改此处
     img_continuous.convertTo(img_L, -1, 1, beta);
 
    cv::Mat gray, blur, binary;
