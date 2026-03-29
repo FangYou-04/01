@@ -9,6 +9,8 @@
 
 # add_executable(Armor Main3.cpp Armors.cpp PoseSlove.cpp Config.cpp Kalman.cpp DrawTrack.cpp HikCamera.cpp) # build2
 
-add_executable(Armor Main2.1.cpp Armors.cpp PoseSlove.cpp Config.cpp KalmanTracker.cpp DrawTrack.cpp HikCamera.cpp ) # build3
+# add_executable(Armor Main3.1.cpp Armors.cpp PoseSlove.cpp Config.cpp KalmanTracker.cpp DrawTrack.cpp HikCamera.cpp ) # build3
+
+add_executable(Armor Main4.cpp Armors.cpp PoseSlove.cpp Config.cpp ExtendedKalman.cpp DrawTrack.cpp HikCamera.cpp)
 
 target_link_libraries(Armor ${OpenCV_LIBS} ${YAML_CPP_LIBRARIES} MvCameraControl pthread)
