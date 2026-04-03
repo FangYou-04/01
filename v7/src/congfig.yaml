@@ -19,7 +19,9 @@ armor_config:
   armor_ratio_max: 4
 
 kalman:
-  processNoisePos: 0.001
-  processNoiseVel: 1.5
-  measurementNoisePos: 0.01
-  initialErrorCov: 1.0
+  processNoisePos: 0.01        # 位置过程噪声（减小一点，更平滑）
+  processNoiseVel: 0.5         # 速度过程噪声（保持不变）
+  measurementNoisePos: 0.01     # 位置观测噪声（保持不变）
+  measurementNoiseYaw: 5     # 偏航观测噪声（弧度²，约 12.8° 标准差）
+  initialErrorCov: 0.5         # 初始协方差
+

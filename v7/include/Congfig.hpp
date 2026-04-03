@@ -35,7 +35,9 @@ struct KalmanConfig
     float processNoisePos;
     float processNoiseVel;
     float measurementNoisePos;
+    float measurementNoiseYaw;
     float initialErrorCov;
+    float yawnoise;
 };
 
 
@@ -136,6 +138,7 @@ namespace YAML
             node["processNoisePos"] = rhs.processNoisePos;
             node["processNoiseVel"] = rhs.processNoiseVel;
             node["measurementNoisePos"] = rhs.measurementNoisePos;
+            node["measurementNoiseYaw"] = rhs.measurementNoiseYaw;
             node["initialErrorCov"] = rhs.initialErrorCov;
             return node;
         }
@@ -147,6 +150,7 @@ namespace YAML
             rhs.processNoisePos = node["processNoisePos"].as<float>();
             rhs.processNoiseVel = node["processNoiseVel"].as<float>();
             rhs.measurementNoisePos = node["measurementNoisePos"].as<float>();
+            rhs.measurementNoiseYaw = node["measurementNoiseYaw"].as<float>();
             rhs.initialErrorCov = node["initialErrorCov"].as<float>();
             return true;
         }

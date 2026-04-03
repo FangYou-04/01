@@ -15,9 +15,9 @@ class ExtendedKalman
 public:
     ExtendedKalman();
 
-    void init(const cv::Point3f& position, double timeStamp);
+    void init(const cv::Point3f& position, double yaw, double timeStamp);
     cv::Point3f predict(double timeStamp);
-    cv::Point3f update(const cv::Point3f measuredPos, double timeStamp);
+    cv::Point3f update(const cv::Point3f measuredPos, double measuredYaw, double timeStamp);
 
     cv::Point3f getEstimatedPosition() const;
     float getPredictedYaw() const;

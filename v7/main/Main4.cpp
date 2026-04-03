@@ -108,12 +108,12 @@ int main()
 
             if (!inited)
             {
-                tracker.init(pos, timeStamp);
+                tracker.init(pos, yaw, timeStamp);
                 inited = true;
             }
             else
             {
-                tracker.update(pos, timeStamp);
+                tracker.update(pos, yaw, timeStamp);
             }
 
             cv::Point3f est_pos = tracker.getEstimatedPosition();

@@ -24,7 +24,7 @@ public:
     void close();
 
     // 检查串口是否打开
-    bool is_open() const;
+    bool is_open() const; 
 
 private:
     int fd; // 文件描述符
