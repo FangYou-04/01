@@ -1,0 +1,24 @@
+[01m[K/home/fang/下载/all1/src/Kalman.cpp:[m[K In constructor ‘[01m[KKalman::Kalman(double, double)[m[K’:
+[01m[K/home/fang/下载/all1/src/Kalman.cpp:16:15:[m[K [01;31m[Kerror: [m[K‘[01m[KKalman[m[K’ is not a member of ‘[01m[Kcv[m[K’; did you mean ‘[01m[KKalman[m[K’?
+   16 |     kf_ = cv::[01;31m[KKalman[m[K(8, 4, 0, CV_64F);
+      |               [01;31m[K^~~~~~[m[K
+In file included from [01m[K/home/fang/下载/all1/src/Kalman.cpp:1[m[K:
+[01m[K/home/fang/下载/all1/include/Kalman.hpp:7:7:[m[K [01;36m[Knote: [m[K‘[01m[KKalman[m[K’ declared here
+    7 | class [01;36m[KKalman[m[K
+      |       [01;36m[K^~~~~~[m[K
+[01m[K/home/fang/下载/all1/src/PoseSolve.cpp:[m[K In member function ‘[01m[Kstd::vector<Armors> ArmorsDetector::detectYoloArmors(const cv::Mat&)[m[K’:
+[01m[K/home/fang/下载/all1/src/PoseSolve.cpp:208:69:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kframe[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  208 | std::vector<Armors> ArmorsDetector::detectYoloArmors([01;35m[Kconst cv::Mat& frame[m[K)
+      |                                                      [01;35m[K~~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/fang/下载/all1/src/PoseSolve.cpp:[m[K In member function ‘[01m[Kstd::vector<Armors> ArmorsDetector::detect(cv::Mat)[m[K’:
+[01m[K/home/fang/下载/all1/src/PoseSolve.cpp:215:58:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kframe[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+  215 | std::vector<Armors> ArmorsDetector::detect([01;35m[Kconst cv::Mat frame[m[K)
+      |                                            [01;35m[K~~~~~~~~~~~~~~^~~~~[m[K
+[01m[K/home/fang/下载/all1/src/Main.cpp:[m[K In function ‘[01m[Kint main()[m[K’:
+[01m[K/home/fang/下载/all1/src/Main.cpp:594:12:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Klast_valid_yaw[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+  594 |     double [01;35m[Klast_valid_yaw[m[K = 0.0;
+      |            [01;35m[K^~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/armor_pose_node.dir/build.make:118：CMakeFiles/armor_pose_node.dir/src/Kalman.cpp.o] 错误 1
+gmake[2]: *** 正在等待未完成的任务....
+gmake[1]: *** [CMakeFiles/Makefile2:137：CMakeFiles/armor_pose_node.dir/all] 错误 2
+gmake: *** [Makefile:146：all] 错误 2

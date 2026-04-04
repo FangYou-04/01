@@ -1,0 +1,4 @@
+Invoking command in '/home/fang/下载/all1/build/armor_pose_solver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/fang/下载/all1 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/fang/下载/all1/install/armor_pose_solver
+Invoked command in '/home/fang/下载/all1/build/armor_pose_solver' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/fang/下载/all1 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/fang/下载/all1/install/armor_pose_solver
+Invoking command in '/home/fang/下载/all1/build/armor_pose_solver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/fang/下载/all1/build/armor_pose_solver -- -j12 -l12
+Invoked command in '/home/fang/下载/all1/build/armor_pose_solver' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/fang/下载/all1/build/armor_pose_solver -- -j12 -l12
