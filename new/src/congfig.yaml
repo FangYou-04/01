@@ -1,0 +1,27 @@
+---
+morph_config:
+  kernel_size: 5
+
+light_config:
+  area: 80
+  ratio_min: 2
+  ratio_max: 4
+  angle: 25
+  angle_to_up: 90.0
+
+armor_config:
+  distance_min: 2.0
+  distance_max: 3.0
+  armor_angle: 20
+  height_diff: 2
+  angle_diff: 2
+  armor_ratio_min: 2
+  armor_ratio_max: 4
+
+kalman:
+  processNoisePos: 0.01        # 位置过程噪声（减小一点，更平滑）
+  processNoiseVel: 0.5         # 速度过程噪声（保持不变）
+  measurementNoisePos: 0.01     # 位置观测噪声（保持不变）
+  measurementNoiseYaw: 5     # 偏航观测噪声（弧度²，约 12.8° 标准差）
+  initialErrorCov: 0.5         # 初始协方差
+
