@@ -14,7 +14,7 @@ public:
                                const std::vector<float>& confidences,
                                const std::vector<int>& classIds);
     // 为了兼容，保留空实现
-    std::vector<Armors> detect(const cv::Mat frame) { return {}; }
+    std::vector<Armors> detect(const cv::Mat /*frame*/) { return {}; }
 
 private:
     bool solveArmorPose(Armors& armor);

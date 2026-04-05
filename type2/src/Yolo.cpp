@@ -109,7 +109,7 @@ std::vector<DetectionResult> YOLOSolver::parseOutput(
         // 保存结果
         DetectionResult res;
         res.class_id = class_id;
-        res.class_name = (class_id < labels_.size()) ? labels_[class_id] : "unknown";
+        res.class_name = (class_id < (int)labels_.size()) ? labels_[class_id] : "unknown";
         res.confidence = max_score;
         res.bbox = cv::Rect(cv::Point(x, y), cv::Size(width, height));
         results.push_back(res);

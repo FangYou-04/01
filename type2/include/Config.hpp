@@ -189,7 +189,5 @@ public:
     ~Config() = default;
 };
 
-Config* Config::instance_ = nullptr;
-std::mutex Config::mutex_;
 
 #endif // CONFIG_HPP

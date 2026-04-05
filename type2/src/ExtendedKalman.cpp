@@ -5,17 +5,25 @@
 
 ExtendedKalman::ExtendedKalman()
     : m_lastTime(0), m_dt(0), m_initialized(false), m_predictedYaw(0.0f) {
-    loadParamInConfig();
+
     m_state = cv::Mat::zeros(6, 1, CV_32F);
     m_cov = cv::Mat::eye(6, 6, CV_32F);
     m_F = cv::Mat::eye(6, 6, CV_32F);
     m_Q = cv::Mat::zeros(6, 6, CV_32F);
     m_R = cv::Mat::zeros(4, 4, CV_32F);
+
+    loadParamInConfig();
 }
 
 void ExtendedKalman::loadParamInConfig() {
-    const AppConfig& cfg = Config::getInstance()->getConfig();
-    const KalmanConfig& k = cfg.kalman;
+    Config* cfg = Config::getInstance();
+    if (!cfg) {
+        std::cerr << "[EKF] ERROR: Config instance is null, using default parameters" << std::endl;
+        // 使用默认值（已在构造函数中设置 m_Q, m_R 等为默认值，这里直接返回）
+        return;
+    }
+    const AppConfig& app_cfg = cfg->getConfig();
+    const KalmanConfig& k = app_cfg.kalman;
     m_Q.at<float>(0,0) = m_Q.at<float>(1,1) = m_Q.at<float>(2,2) = k.processNoisePos;
     m_Q.at<float>(3,3) = m_Q.at<float>(4,4) = m_Q.at<float>(5,5) = k.processNoiseVel;
     m_R.at<float>(0,0) = m_R.at<float>(1,1) = m_R.at<float>(2,2) = k.measurementNoisePos;

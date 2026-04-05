@@ -1,0 +1,42 @@
+[0.011s] Invoking command in '/home/fang/桌面/ZM/type2/build/armor_pose_solver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/fang/桌面/ZM/type2/build/armor_pose_solver -- -j12 -l12
+[0.054s] [35m[1mConsolidate compiler generated dependencies of target armor_pose_node[0m
+[0.083s] [100%] Built target armor_pose_node
+[0.094s] Invoked command in '/home/fang/桌面/ZM/type2/build/armor_pose_solver' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/fang/桌面/ZM/type2/build/armor_pose_solver -- -j12 -l12
+[0.104s] Invoking command in '/home/fang/桌面/ZM/type2/build/armor_pose_solver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/fang/桌面/ZM/type2/build/armor_pose_solver
+[0.111s] -- Install configuration: "Release"
+[0.112s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/lib/armor_pose_solver/armor_pose_node
+[0.112s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config
+[0.112s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor6red.mp4
+[0.112s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/3(bai.jpg
+[0.112s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor5blue.mp4
+[0.112s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/frame7red_0005.jpg
+[0.112s] -- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/config.yaml
+[0.112s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/5.mp4
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/test_armor.mp4
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/best.pt
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor7red.mp4
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/data.yaml
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor4blue.mp4
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/frame4blue_0016.jpg
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/best.onnx
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/3(hong.jpg
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/calib_result.yml
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor1.mp4
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/launch
+[0.113s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/launch/pose_launch.py
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/ament_index/resource_index/package_run_dependencies/armor_pose_solver
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/ament_index/resource_index/parent_prefix_path/armor_pose_solver
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/environment/ament_prefix_path.sh
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/environment/ament_prefix_path.dsv
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/environment/path.sh
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/environment/path.dsv
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/local_setup.bash
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/local_setup.sh
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/local_setup.zsh
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/local_setup.dsv
+[0.114s] -- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/package.dsv
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/ament_index/resource_index/packages/armor_pose_solver
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/cmake/armor_pose_solverConfig.cmake
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/cmake/armor_pose_solverConfig-version.cmake
+[0.114s] -- Up-to-date: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/package.xml
+[0.115s] Invoked command in '/home/fang/桌面/ZM/type2/build/armor_pose_solver' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/fang/桌面/ZM/type2/build/armor_pose_solver

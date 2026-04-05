@@ -17,7 +17,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # 1. 查找 OpenCV（必须包含 dnn 和 calib3d）
 find_package(OpenCV 4 REQUIRED COMPONENTS core highgui imgproc videoio imgcodecs calib3d dnn)
 if(NOT OpenCV_FOUND)
-  message(FATAL_ERROR "未找到系统 OpenCV 4！请执行: sudo apt install libopencv-dev")
+  message(FATAL_ERROR "未找到系统 OpenCV 4!请执行: sudo apt install libopencv-dev")
 else()
   message(STATUS "找到系统 OpenCV: ${OpenCV_VERSION}")
 endif()
@@ -30,14 +30,13 @@ find_package(yaml-cpp REQUIRED)
 
 # 3. 可选：海康 MVS SDK（如果存在则启用）
 set(MVS_DIR "/opt/MVS")
-if(EXISTS ${MVS_DIR})
-  message(STATUS "发现海康 MVS SDK，将启用海康相机支持")
+if(EXISTS "${MVS_DIR}/lib/libMvCameraControl.so")
+  message(STATUS "发现海康 MVS SDK,将启用海康相机支持")
   include_directories(${MVS_DIR}/include)
   link_directories(${MVS_DIR}/lib)
   set(HIK_FOUND TRUE)
 else()
-  message(STATUS "未找到海康 MVS SDK，禁用海康相机支持")
-  set(HIK_FOUND FALSE)
+  message(STATUS "未找到海康 MVS SDK,禁用海康相机支持")
 endif()
 
 # 4. 头文件目录
@@ -51,10 +50,11 @@ include_directories(
 # 5. 源文件列表（整合新旧模块）
 set(SOURCES
   src/Main1.cpp                # 主程序（整合后的 YOLO+EKF+跟踪）
-  src/Yolo.cpp                # YOLO 检测器
+  src/Yolo1.cpp                # YOLO 检测器
   src/PoseSolve.cpp           # 位姿解算（从 YOLO 框解算装甲板位姿）
   src/ExtendedKalman.cpp      # 扩展卡尔曼滤波器
   src/Serial.cpp              # 串口通信（可选，保留原功能）
+  src/Config.cpp              # 配置文件解析（从 YAML 加载参数）
 )
 
 # 如果启用海康相机，添加 HikCamera.cpp

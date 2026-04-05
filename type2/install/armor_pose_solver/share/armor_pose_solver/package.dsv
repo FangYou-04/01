@@ -1,0 +1,8 @@
+source;share/armor_pose_solver/hook/cmake_prefix_path.ps1
+source;share/armor_pose_solver/hook/cmake_prefix_path.dsv
+source;share/armor_pose_solver/hook/cmake_prefix_path.sh
+source;share/armor_pose_solver/local_setup.bash
+source;share/armor_pose_solver/local_setup.dsv
+source;share/armor_pose_solver/local_setup.ps1
+source;share/armor_pose_solver/local_setup.sh
+source;share/armor_pose_solver/local_setup.zsh

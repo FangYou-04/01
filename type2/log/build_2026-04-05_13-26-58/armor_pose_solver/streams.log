@@ -1,0 +1,11 @@
+[0.009s] Invoking command in '/home/fang/桌面/ZM/type2/build/armor_pose_solver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/fang/桌面/ZM/type2/build/armor_pose_solver -- -j12 -l12
+[0.051s] [35m[1mConsolidate compiler generated dependencies of target armor_pose_node[0m
+[0.077s] [ 16%] [32mBuilding CXX object CMakeFiles/armor_pose_node.dir/src/Main1.cpp.o[0m
+[1.231s] [01m[K/home/fang/桌面/ZM/type2/src/Main1.cpp:[m[K In function ‘[01m[Kint main()[m[K’:
+[1.231s] [01m[K/home/fang/桌面/ZM/type2/src/Main1.cpp:161:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kcalib_from_config[m[K’ was not declared in this scope
+[1.231s]   161 |             [01;31m[Kcalib_from_config[m[K = true;
+[1.231s]       |             [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+[1.888s] gmake[2]: *** [CMakeFiles/armor_pose_node.dir/build.make:76：CMakeFiles/armor_pose_node.dir/src/Main1.cpp.o] 错误 1
+[1.888s] gmake[1]: *** [CMakeFiles/Makefile2:137：CMakeFiles/armor_pose_node.dir/all] 错误 2
+[1.889s] gmake: *** [Makefile:146：all] 错误 2
+[1.891s] Invoked command in '/home/fang/桌面/ZM/type2/build/armor_pose_solver' returned '2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/fang/桌面/ZM/type2/build/armor_pose_solver -- -j12 -l12

@@ -1,0 +1,15 @@
+[01m[K/home/fang/桌面/ZM/type2/src/Main1.cpp:[m[K In function ‘[01m[Kint main()[m[K’:
+[01m[K/home/fang/桌面/ZM/type2/src/Main1.cpp:150:14:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kcalib_from_config[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+  150 |         bool [01;35m[Kcalib_from_config[m[K = false;
+      |              [01;35m[K^~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/fang/桌面/ZM/type2/src/Main1.cpp:199:16:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Klast_valid_yaw[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+  199 |         double [01;35m[Klast_valid_yaw[m[K = 0.0;
+      |                [01;35m[K^~~~~~~~~~~~~~[m[K
+/usr/bin/ld: CMakeFiles/armor_pose_node.dir/src/PoseSolve.cpp.o:(.bss+0x0): multiple definition of `Config::mutex_'; CMakeFiles/armor_pose_node.dir/src/Main1.cpp.o:(.bss+0x0): first defined here
+/usr/bin/ld: CMakeFiles/armor_pose_node.dir/src/PoseSolve.cpp.o:(.bss+0x28): multiple definition of `Config::instance_'; CMakeFiles/armor_pose_node.dir/src/Main1.cpp.o:(.bss+0x28): first defined here
+/usr/bin/ld: CMakeFiles/armor_pose_node.dir/src/ExtendedKalman.cpp.o:(.bss+0x0): multiple definition of `Config::mutex_'; CMakeFiles/armor_pose_node.dir/src/Main1.cpp.o:(.bss+0x0): first defined here
+/usr/bin/ld: CMakeFiles/armor_pose_node.dir/src/ExtendedKalman.cpp.o:(.bss+0x28): multiple definition of `Config::instance_'; CMakeFiles/armor_pose_node.dir/src/Main1.cpp.o:(.bss+0x28): first defined here
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [CMakeFiles/armor_pose_node.dir/build.make:583：armor_pose_node] 错误 1
+gmake[1]: *** [CMakeFiles/Makefile2:137：CMakeFiles/armor_pose_node.dir/all] 错误 2
+gmake: *** [Makefile:146：all] 错误 2

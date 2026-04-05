@@ -1,0 +1,71 @@
+-- 找到系统 OpenCV: 4.6.0
+-- Found ament_cmake: 1.3.13 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found rclcpp: 16.0.18 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.8 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.8 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.8 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.10 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- 未找到海康 MVS SDK,禁用海康相机支持
+-- Found ament_lint_auto: 0.12.15 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Added test 'copyright' to check source files copyright and LICENSE
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: /home/fang/桌面/ZM/type2/include
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'cpplint' to check C / C++ code against the Google style
+-- Configured cpplint exclude dirs and/or files: 
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/fang/桌面/ZM/type2/build/armor_pose_solver
+[35m[1mConsolidate compiler generated dependencies of target armor_pose_node[0m
+[ 28%] [32mBuilding CXX object CMakeFiles/armor_pose_node.dir/src/PoseSolve.cpp.o[0m
+[ 42%] [32mBuilding CXX object CMakeFiles/armor_pose_node.dir/src/Main1.cpp.o[0m
+[ 42%] [32mBuilding CXX object CMakeFiles/armor_pose_node.dir/src/Config.cpp.o[0m
+[ 57%] [32mBuilding CXX object CMakeFiles/armor_pose_node.dir/src/ExtendedKalman.cpp.o[0m
+[ 71%] [32m[1mLinking CXX executable armor_pose_node[0m
+[100%] Built target armor_pose_node
+-- Install configuration: "Release"
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/lib/armor_pose_solver/armor_pose_node
+-- Set runtime path of "/home/fang/桌面/ZM/type2/install/armor_pose_solver/lib/armor_pose_solver/armor_pose_node" to ""
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor6red.mp4
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/3(bai.jpg
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor5blue.mp4
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/frame7red_0005.jpg
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/config.yaml
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/5.mp4
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/test_armor.mp4
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/best.pt
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor7red.mp4
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor4blue.mp4
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/frame4blue_0016.jpg
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/best.onnx
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/3(hong.jpg
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor1.mp4
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/config/armor_params.yaml
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/launch
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/launch/pose_launch.py
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/ament_index/resource_index/package_run_dependencies/armor_pose_solver
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/ament_index/resource_index/parent_prefix_path/armor_pose_solver
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/environment/ament_prefix_path.sh
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/environment/ament_prefix_path.dsv
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/environment/path.sh
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/environment/path.dsv
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/local_setup.bash
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/local_setup.sh
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/local_setup.zsh
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/local_setup.dsv
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/package.dsv
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/ament_index/resource_index/packages/armor_pose_solver
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/cmake/armor_pose_solverConfig.cmake
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/cmake/armor_pose_solverConfig-version.cmake
+-- Installing: /home/fang/桌面/ZM/type2/install/armor_pose_solver/share/armor_pose_solver/package.xml
