@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <cstring>
 #include <cerrno>
+#include <sys/ioctl.h>
 
 Serial::Serial() : fd(-1) {}
 

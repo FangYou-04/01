@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/fang/桌面/vision01/v7/main/HikCamera.cpp" "main/CMakeFiles/Armor.dir/HikCamera.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/HikCamera.cpp.o.d"
   "/home/fang/桌面/vision01/v7/main/Main4.cpp" "main/CMakeFiles/Armor.dir/Main4.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/Main4.cpp.o.d"
   "/home/fang/桌面/vision01/v7/main/PoseSlove.cpp" "main/CMakeFiles/Armor.dir/PoseSlove.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/PoseSlove.cpp.o.d"
+  "/home/fang/桌面/vision01/v7/main/Serial.cpp" "main/CMakeFiles/Armor.dir/Serial.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/Serial.cpp.o.d"
   )
 
 # Targets to which this target links.

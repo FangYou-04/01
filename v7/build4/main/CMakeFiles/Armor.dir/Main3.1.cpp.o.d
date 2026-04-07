@@ -1,5 +1,6 @@
-main/CMakeFiles/Armor.dir/Main4.cpp.o: \
- /home/fang/桌面/vision01/v7/main/Main4.cpp /usr/include/stdc-predef.h \
+main/CMakeFiles/Armor.dir/Main3.1.cpp.o: \
+ /home/fang/桌面/vision01/v7/main/Main3.1.cpp \
+ /usr/include/stdc-predef.h \
  /home/fang/桌面/vision01/v7/include/Congfig.hpp \
  /usr/include/c++/11/string \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -387,19 +388,7 @@ main/CMakeFiles/Armor.dir/Main4.cpp.o: \
  /home/fang/桌面/vision01/v7/include/PoseSlove.hpp \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
  /home/fang/桌面/vision01/v7/include/Struct.hpp \
- /home/fang/桌面/vision01/v7/include/ExtendedKalman.hpp \
- /home/fang/桌面/vision01/v7/include/Serial.hpp /usr/include/termios.h \
- /usr/include/x86_64-linux-gnu/bits/termios.h \
- /usr/include/x86_64-linux-gnu/bits/termios-struct.h \
- /usr/include/x86_64-linux-gnu/bits/termios-c_cc.h \
- /usr/include/x86_64-linux-gnu/bits/termios-c_iflag.h \
- /usr/include/x86_64-linux-gnu/bits/termios-c_oflag.h \
- /usr/include/x86_64-linux-gnu/bits/termios-baud.h \
- /usr/include/x86_64-linux-gnu/bits/termios-c_cflag.h \
- /usr/include/x86_64-linux-gnu/bits/termios-c_lflag.h \
- /usr/include/x86_64-linux-gnu/bits/termios-tcflow.h \
- /usr/include/x86_64-linux-gnu/bits/termios-misc.h \
- /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
+ /home/fang/桌面/vision01/v7/include/KalmanTracker.hpp \
  /home/fang/桌面/vision01/v7/include/DrawTrack.hpp \
  /home/fang/桌面/vision01/v7/include/PoseSlove.hpp \
  /home/fang/桌面/vision01/v7/include/Kalman.hpp \

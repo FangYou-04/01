@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Armor.dir/Main4.cpp.o.d"
   "CMakeFiles/Armor.dir/PoseSlove.cpp.o"
   "CMakeFiles/Armor.dir/PoseSlove.cpp.o.d"
+  "CMakeFiles/Armor.dir/Serial.cpp.o"
+  "CMakeFiles/Armor.dir/Serial.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

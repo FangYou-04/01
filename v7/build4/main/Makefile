@@ -298,6 +298,30 @@ PoseSlove.cpp.s:
 	cd /home/fang/桌面/vision01/v7/build4 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/PoseSlove.cpp.s
 .PHONY : PoseSlove.cpp.s
 
+Serial.o: Serial.cpp.o
+.PHONY : Serial.o
+
+# target to build an object file
+Serial.cpp.o:
+	cd /home/fang/桌面/vision01/v7/build4 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Serial.cpp.o
+.PHONY : Serial.cpp.o
+
+Serial.i: Serial.cpp.i
+.PHONY : Serial.i
+
+# target to preprocess a source file
+Serial.cpp.i:
+	cd /home/fang/桌面/vision01/v7/build4 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Serial.cpp.i
+.PHONY : Serial.cpp.i
+
+Serial.s: Serial.cpp.s
+.PHONY : Serial.s
+
+# target to generate assembly for a file
+Serial.cpp.s:
+	cd /home/fang/桌面/vision01/v7/build4 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Serial.cpp.s
+.PHONY : Serial.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -328,6 +352,9 @@ help:
 	@echo "... PoseSlove.o"
 	@echo "... PoseSlove.i"
 	@echo "... PoseSlove.s"
+	@echo "... Serial.o"
+	@echo "... Serial.i"
+	@echo "... Serial.s"
 .PHONY : help
 
 

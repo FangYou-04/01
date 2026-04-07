@@ -1,7 +1,7 @@
-main/CMakeFiles/Armor.dir/PoseSlove.cpp.o: \
- /home/fang/桌面/vision01/v7/main/PoseSlove.cpp \
+main/CMakeFiles/Armor.dir/KalmanTracker.cpp.o: \
+ /home/fang/桌面/vision01/v7/main/KalmanTracker.cpp \
  /usr/include/stdc-predef.h \
- /home/fang/桌面/vision01/v7/include/PoseSlove.hpp \
+ /home/fang/桌面/vision01/v7/include/KalmanTracker.hpp \
  /usr/local/include/opencv4/opencv2/opencv.hpp \
  /usr/local/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/local/include/opencv4/opencv2/core.hpp \
@@ -359,8 +359,6 @@ main/CMakeFiles/Armor.dir/PoseSlove.cpp.o: \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
- /home/fang/桌面/vision01/v7/include/Struct.hpp \
- /usr/local/include/opencv4/opencv2/opencv.hpp \
  /home/fang/桌面/vision01/v7/include/Congfig.hpp \
  /usr/include/yaml-cpp/yaml.h /usr/include/yaml-cpp/parser.h \
  /usr/include/yaml-cpp/dll.h /usr/include/yaml-cpp/emitter.h \
