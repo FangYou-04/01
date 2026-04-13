@@ -16,7 +16,6 @@ struct LightConfig
     double ratio_min;
     double ratio_max;
     int angle;
-    double angle_to_up;
 };
 
 struct ArmorConfig
@@ -40,13 +39,22 @@ struct KalmanConfig
     float yawnoise;
 };
 
+// 在 Congfig.hpp 中添加 UdpConfig 定义（放在其他 Config 结构体附近）
+struct UdpConfig
+{
+    bool enabled = false;
+    std::string host = "127.0.0.1";
+    int port = 9870;
+};
 
+// 在 AppConfig 结构体中增加成员
 struct AppConfig
 {
     MorphConfig morph_config;
     LightConfig light_config;
     ArmorConfig armor_config;
     KalmanConfig kalman;
+    UdpConfig udp;   // 新增
 };
 
 namespace YAML
@@ -81,19 +89,17 @@ namespace YAML
             node["ratio_min"] = rhs.ratio_min;
             node["ratio_max"] = rhs.ratio_max;
             node["angle"] = rhs.angle;
-            node["angle_to_up"] = rhs.angle_to_up;
             return node;
         }
 
         static bool decode(const Node& node, LightConfig& rhs)
         {
-            if (!node.IsMap() || !node["area"] || !node["ratio_min"] || !node["ratio_max"] || !node["angle"] || !node["angle_to_up"])
+            if (!node.IsMap() || !node["area"] || !node["ratio_min"] || !node["ratio_max"] || !node["angle"])
                 return false;
             rhs.area = node["area"].as<int>();
             rhs.ratio_min = node["ratio_min"].as<double>();
             rhs.ratio_max = node["ratio_max"].as<double>();
             rhs.angle = node["angle"].as<int>();
-            rhs.angle_to_up = node["angle_to_up"].as<double>();
             return true;
         }
     };
@@ -157,6 +163,29 @@ namespace YAML
     };
 
     template<>
+    struct convert<UdpConfig>
+    {
+        static Node encode(const UdpConfig& rhs)
+        {
+            Node node;
+            node["enabled"] = rhs.enabled;
+            node["host"] = rhs.host;
+            node["port"] = rhs.port;
+            return node;
+        }
+
+        static bool decode(const Node& node, UdpConfig& rhs)
+        {
+            if (!node.IsMap() || !node["enabled"] || !node["host"] || !node["port"])
+                return false;
+            rhs.enabled = node["enabled"].as<bool>();
+            rhs.host = node["host"].as<std::string>();
+            rhs.port = node["port"].as<int>();
+            return true;
+        }
+    };
+
+    template<>
     struct convert<AppConfig>
     {
         static Node encode(const AppConfig& rhs)
@@ -166,6 +195,7 @@ namespace YAML
             node["light_config"] = rhs.light_config;
             node["armor_config"] = rhs.armor_config;
             node["kalman"] = rhs.kalman;
+            node["udp"] = rhs.udp; // 新增
             return node;
         }
 
@@ -177,6 +207,7 @@ namespace YAML
             rhs.light_config = node["light_config"].as<LightConfig>();
             rhs.armor_config = node["armor_config"].as<ArmorConfig>();
             rhs.kalman = node["kalman"].as<KalmanConfig>();
+            rhs.udp = node["udp"].as<UdpConfig>(); // 新增
             return true;
         }
     };  

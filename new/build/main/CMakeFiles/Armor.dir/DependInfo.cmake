@@ -13,7 +13,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/fang/桌面/vision01/new/main/DrawTracke.cpp" "main/CMakeFiles/Armor.dir/DrawTracke.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/DrawTracke.cpp.o.d"
   "/home/fang/桌面/vision01/new/main/ExtendedKalman.cpp" "main/CMakeFiles/Armor.dir/ExtendedKalman.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/ExtendedKalman.cpp.o.d"
   "/home/fang/桌面/vision01/new/main/HikCamera.cpp" "main/CMakeFiles/Armor.dir/HikCamera.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/HikCamera.cpp.o.d"
-  "/home/fang/桌面/vision01/new/main/Main4.cpp" "main/CMakeFiles/Armor.dir/Main4.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/Main4.cpp.o.d"
+  "/home/fang/桌面/vision01/new/main/MMain.cpp" "main/CMakeFiles/Armor.dir/MMain.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/MMain.cpp.o.d"
+  "/home/fang/桌面/vision01/new/main/Plotter.cpp" "main/CMakeFiles/Armor.dir/Plotter.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/Plotter.cpp.o.d"
   "/home/fang/桌面/vision01/new/main/PoseSlove.cpp" "main/CMakeFiles/Armor.dir/PoseSlove.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/PoseSlove.cpp.o.d"
   "/home/fang/桌面/vision01/new/main/Serial.cpp" "main/CMakeFiles/Armor.dir/Serial.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/Serial.cpp.o.d"
   )

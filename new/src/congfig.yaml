@@ -7,7 +7,6 @@ light_config:
   ratio_min: 2
   ratio_max: 4
   angle: 25
-  angle_to_up: 90.0
 
 armor_config:
   distance_min: 2.0
@@ -25,3 +24,7 @@ kalman:
   measurementNoiseYaw: 5     # 偏航观测噪声（弧度²，约 12.8° 标准差）
   initialErrorCov: 0.5         # 初始协方差
 
+udp:
+  enabled: true
+  host: "127.0.0.1"
+  port: 9870

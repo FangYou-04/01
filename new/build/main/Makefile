@@ -250,29 +250,53 @@ HikCamera.cpp.s:
 	cd /home/fang/桌面/vision01/new/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/HikCamera.cpp.s
 .PHONY : HikCamera.cpp.s
 
-Main4.o: Main4.cpp.o
-.PHONY : Main4.o
+MMain.o: MMain.cpp.o
+.PHONY : MMain.o
 
 # target to build an object file
-Main4.cpp.o:
-	cd /home/fang/桌面/vision01/new/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main4.cpp.o
-.PHONY : Main4.cpp.o
+MMain.cpp.o:
+	cd /home/fang/桌面/vision01/new/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/MMain.cpp.o
+.PHONY : MMain.cpp.o
 
-Main4.i: Main4.cpp.i
-.PHONY : Main4.i
+MMain.i: MMain.cpp.i
+.PHONY : MMain.i
 
 # target to preprocess a source file
-Main4.cpp.i:
-	cd /home/fang/桌面/vision01/new/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main4.cpp.i
-.PHONY : Main4.cpp.i
+MMain.cpp.i:
+	cd /home/fang/桌面/vision01/new/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/MMain.cpp.i
+.PHONY : MMain.cpp.i
 
-Main4.s: Main4.cpp.s
-.PHONY : Main4.s
+MMain.s: MMain.cpp.s
+.PHONY : MMain.s
 
 # target to generate assembly for a file
-Main4.cpp.s:
-	cd /home/fang/桌面/vision01/new/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main4.cpp.s
-.PHONY : Main4.cpp.s
+MMain.cpp.s:
+	cd /home/fang/桌面/vision01/new/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/MMain.cpp.s
+.PHONY : MMain.cpp.s
+
+Plotter.o: Plotter.cpp.o
+.PHONY : Plotter.o
+
+# target to build an object file
+Plotter.cpp.o:
+	cd /home/fang/桌面/vision01/new/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Plotter.cpp.o
+.PHONY : Plotter.cpp.o
+
+Plotter.i: Plotter.cpp.i
+.PHONY : Plotter.i
+
+# target to preprocess a source file
+Plotter.cpp.i:
+	cd /home/fang/桌面/vision01/new/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Plotter.cpp.i
+.PHONY : Plotter.cpp.i
+
+Plotter.s: Plotter.cpp.s
+.PHONY : Plotter.s
+
+# target to generate assembly for a file
+Plotter.cpp.s:
+	cd /home/fang/桌面/vision01/new/build && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Plotter.cpp.s
+.PHONY : Plotter.cpp.s
 
 PoseSlove.o: PoseSlove.cpp.o
 .PHONY : PoseSlove.o
@@ -346,9 +370,12 @@ help:
 	@echo "... HikCamera.o"
 	@echo "... HikCamera.i"
 	@echo "... HikCamera.s"
-	@echo "... Main4.o"
-	@echo "... Main4.i"
-	@echo "... Main4.s"
+	@echo "... MMain.o"
+	@echo "... MMain.i"
+	@echo "... MMain.s"
+	@echo "... Plotter.o"
+	@echo "... Plotter.i"
+	@echo "... Plotter.s"
 	@echo "... PoseSlove.o"
 	@echo "... PoseSlove.i"
 	@echo "... PoseSlove.s"

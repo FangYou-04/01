@@ -37,20 +37,6 @@ cv::Mat ArmorsDetector::preprocessImage(const cv::Mat &img)
     return img_N;
 }
 
-// 调整旋转矩形角度，使其长边接近垂直方向
-void adjustRotatedRect(cv::RotatedRect& rect, const float angle_to_up)
-{
-    // 保证 rect.size.height 为长边，并对 angle 做规范化到 [-90,90)
-    float w = rect.size.width;
-    float h = rect.size.height;
-    if (w > h) {
-        std::swap(rect.size.width, rect.size.height);
-        rect.angle += 90.0f; // 旋转角度随长短边交换而变化
-    }
-    // 规范化角度到 [-90,90)
-    while (rect.angle >= 90.0f) rect.angle -= 180.0f;
-    while (rect.angle < -90.0f) rect.angle += 180.0f;
-}
 
 // 灯条检测
 std::vector<Light> ArmorsDetector::detectLights(const cv::Mat &mask) 
@@ -81,8 +67,6 @@ std::vector<Light> ArmorsDetector::detectLights(const cv::Mat &mask)
         // {
         //     rect = cv::minAreaRect(contours[i]); // 椭圆拟合失败时降级
         // }
-
-        adjustRotatedRect(rect, config_.light_config.angle_to_up); // 调整角度使其接近垂直
 
         // 规范化宽高
         float width = rect.size.width;

@@ -69,19 +69,19 @@ include main/CMakeFiles/Armor.dir/progress.make
 # Include the compile flags for this target's objects.
 include main/CMakeFiles/Armor.dir/flags.make
 
-main/CMakeFiles/Armor.dir/Main4.cpp.o: main/CMakeFiles/Armor.dir/flags.make
-main/CMakeFiles/Armor.dir/Main4.cpp.o: ../main/Main4.cpp
-main/CMakeFiles/Armor.dir/Main4.cpp.o: main/CMakeFiles/Armor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fang/桌面/vision01/new/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object main/CMakeFiles/Armor.dir/Main4.cpp.o"
-	cd /home/fang/桌面/vision01/new/build/main && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT main/CMakeFiles/Armor.dir/Main4.cpp.o -MF CMakeFiles/Armor.dir/Main4.cpp.o.d -o CMakeFiles/Armor.dir/Main4.cpp.o -c /home/fang/桌面/vision01/new/main/Main4.cpp
+main/CMakeFiles/Armor.dir/MMain.cpp.o: main/CMakeFiles/Armor.dir/flags.make
+main/CMakeFiles/Armor.dir/MMain.cpp.o: ../main/MMain.cpp
+main/CMakeFiles/Armor.dir/MMain.cpp.o: main/CMakeFiles/Armor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fang/桌面/vision01/new/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object main/CMakeFiles/Armor.dir/MMain.cpp.o"
+	cd /home/fang/桌面/vision01/new/build/main && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT main/CMakeFiles/Armor.dir/MMain.cpp.o -MF CMakeFiles/Armor.dir/MMain.cpp.o.d -o CMakeFiles/Armor.dir/MMain.cpp.o -c /home/fang/桌面/vision01/new/main/MMain.cpp
 
-main/CMakeFiles/Armor.dir/Main4.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Armor.dir/Main4.cpp.i"
-	cd /home/fang/桌面/vision01/new/build/main && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fang/桌面/vision01/new/main/Main4.cpp > CMakeFiles/Armor.dir/Main4.cpp.i
+main/CMakeFiles/Armor.dir/MMain.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Armor.dir/MMain.cpp.i"
+	cd /home/fang/桌面/vision01/new/build/main && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fang/桌面/vision01/new/main/MMain.cpp > CMakeFiles/Armor.dir/MMain.cpp.i
 
-main/CMakeFiles/Armor.dir/Main4.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Armor.dir/Main4.cpp.s"
-	cd /home/fang/桌面/vision01/new/build/main && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fang/桌面/vision01/new/main/Main4.cpp -o CMakeFiles/Armor.dir/Main4.cpp.s
+main/CMakeFiles/Armor.dir/MMain.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Armor.dir/MMain.cpp.s"
+	cd /home/fang/桌面/vision01/new/build/main && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fang/桌面/vision01/new/main/MMain.cpp -o CMakeFiles/Armor.dir/MMain.cpp.s
 
 main/CMakeFiles/Armor.dir/Armors.cpp.o: main/CMakeFiles/Armor.dir/flags.make
 main/CMakeFiles/Armor.dir/Armors.cpp.o: ../main/Armors.cpp
@@ -181,21 +181,36 @@ main/CMakeFiles/Armor.dir/Serial.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Armor.dir/Serial.cpp.s"
 	cd /home/fang/桌面/vision01/new/build/main && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fang/桌面/vision01/new/main/Serial.cpp -o CMakeFiles/Armor.dir/Serial.cpp.s
 
+main/CMakeFiles/Armor.dir/Plotter.cpp.o: main/CMakeFiles/Armor.dir/flags.make
+main/CMakeFiles/Armor.dir/Plotter.cpp.o: ../main/Plotter.cpp
+main/CMakeFiles/Armor.dir/Plotter.cpp.o: main/CMakeFiles/Armor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/fang/桌面/vision01/new/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object main/CMakeFiles/Armor.dir/Plotter.cpp.o"
+	cd /home/fang/桌面/vision01/new/build/main && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT main/CMakeFiles/Armor.dir/Plotter.cpp.o -MF CMakeFiles/Armor.dir/Plotter.cpp.o.d -o CMakeFiles/Armor.dir/Plotter.cpp.o -c /home/fang/桌面/vision01/new/main/Plotter.cpp
+
+main/CMakeFiles/Armor.dir/Plotter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Armor.dir/Plotter.cpp.i"
+	cd /home/fang/桌面/vision01/new/build/main && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/fang/桌面/vision01/new/main/Plotter.cpp > CMakeFiles/Armor.dir/Plotter.cpp.i
+
+main/CMakeFiles/Armor.dir/Plotter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Armor.dir/Plotter.cpp.s"
+	cd /home/fang/桌面/vision01/new/build/main && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/fang/桌面/vision01/new/main/Plotter.cpp -o CMakeFiles/Armor.dir/Plotter.cpp.s
+
 # Object files for target Armor
 Armor_OBJECTS = \
-"CMakeFiles/Armor.dir/Main4.cpp.o" \
+"CMakeFiles/Armor.dir/MMain.cpp.o" \
 "CMakeFiles/Armor.dir/Armors.cpp.o" \
 "CMakeFiles/Armor.dir/PoseSlove.cpp.o" \
 "CMakeFiles/Armor.dir/Config.cpp.o" \
 "CMakeFiles/Armor.dir/ExtendedKalman.cpp.o" \
 "CMakeFiles/Armor.dir/DrawTracke.cpp.o" \
 "CMakeFiles/Armor.dir/HikCamera.cpp.o" \
-"CMakeFiles/Armor.dir/Serial.cpp.o"
+"CMakeFiles/Armor.dir/Serial.cpp.o" \
+"CMakeFiles/Armor.dir/Plotter.cpp.o"
 
 # External object files for target Armor
 Armor_EXTERNAL_OBJECTS =
 
-main/Armor: main/CMakeFiles/Armor.dir/Main4.cpp.o
+main/Armor: main/CMakeFiles/Armor.dir/MMain.cpp.o
 main/Armor: main/CMakeFiles/Armor.dir/Armors.cpp.o
 main/Armor: main/CMakeFiles/Armor.dir/PoseSlove.cpp.o
 main/Armor: main/CMakeFiles/Armor.dir/Config.cpp.o
@@ -203,25 +218,26 @@ main/Armor: main/CMakeFiles/Armor.dir/ExtendedKalman.cpp.o
 main/Armor: main/CMakeFiles/Armor.dir/DrawTracke.cpp.o
 main/Armor: main/CMakeFiles/Armor.dir/HikCamera.cpp.o
 main/Armor: main/CMakeFiles/Armor.dir/Serial.cpp.o
+main/Armor: main/CMakeFiles/Armor.dir/Plotter.cpp.o
 main/Armor: main/CMakeFiles/Armor.dir/build.make
-main/Armor: /usr/local/lib/libopencv_gapi.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_highgui.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_ml.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_objdetect.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_photo.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_stitching.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_video.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_videoio.so.4.6.0
+main/Armor: /usr/local/lib/libopencv_gapi.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_highgui.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_ml.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_objdetect.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_photo.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_stitching.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_video.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_videoio.so.4.9.0
 main/Armor: /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.7.0
-main/Armor: /usr/local/lib/libopencv_imgcodecs.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_dnn.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_calib3d.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_features2d.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_flann.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_imgproc.so.4.6.0
-main/Armor: /usr/local/lib/libopencv_core.so.4.6.0
+main/Armor: /usr/local/lib/libopencv_imgcodecs.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_dnn.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_calib3d.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_features2d.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_flann.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_imgproc.so.4.9.0
+main/Armor: /usr/local/lib/libopencv_core.so.4.9.0
 main/Armor: main/CMakeFiles/Armor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fang/桌面/vision01/new/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Armor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/fang/桌面/vision01/new/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable Armor"
 	cd /home/fang/桌面/vision01/new/build/main && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Armor.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
