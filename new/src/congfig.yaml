@@ -1,28 +1,29 @@
 ---
 morph_config:
-  kernel_size: 5
+  kernel_size: 3
 
 light_config:
-  area: 80
+  area: 100
   ratio_min: 2
-  ratio_max: 4
-  angle: 25
+  ratio_max: 5
+  angle: 50
 
 armor_config:
-  distance_min: 2.0
-  distance_max: 3.0
-  armor_angle: 20
-  height_diff: 2
-  angle_diff: 2
-  armor_ratio_min: 2
+  distance_min: 1.5
+  distance_max: 3.5
+  armor_angle: 50
+  height_diff: 3
+  angle_diff: 3
+  armor_ratio_min: 1
   armor_ratio_max: 4
 
 kalman:
-  processNoisePos: 0.01        # 位置过程噪声（减小一点，更平滑）
-  processNoiseVel: 0.5         # 速度过程噪声（保持不变）
-  measurementNoisePos: 0.01     # 位置观测噪声（保持不变）
-  measurementNoiseYaw: 5     # 偏航观测噪声（弧度²，约 12.8° 标准差）
-  initialErrorCov: 0.5         # 初始协方差
+  processNoisePos: 0.01        # 位置过程噪声
+  processNoiseVel: 0.01        # 速度过程噪声
+  measurementNoisePos: 0.01   # 位置观测噪声
+  measurementNoiseYaw: 10   # 偏航观测噪声（弧度²）
+  initialErrorCov: 1          # 初始协方差
+  yawnoise: 10               # yaw角速度过程噪声（越小越相信恒定速度）
 
 udp:
   enabled: true

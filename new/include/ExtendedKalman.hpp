@@ -4,10 +4,9 @@
 #include <opencv2/opencv.hpp>
 
 /*
-    六维卡尔曼（拓展卡尔曼）
-    状态向量： x, y, z, vx, vy, vz
-    观测： x, y, z
-    非线性： yaw = atan2(y, x)
+    七维拓展卡尔曼滤波器
+    状态向量： x, y, z, vx, vy, vz, yaw
+    观测： x, y, z, yaw
 */
 
 class ExtendedKalman

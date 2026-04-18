@@ -16,8 +16,8 @@ struct LightConfig
     double ratio_min;
     double ratio_max;
     int angle;
+    float min_fill_ratio; // 新增：最小填充率
 };
-
 struct ArmorConfig
 {
     double distance_min;
@@ -146,6 +146,7 @@ namespace YAML
             node["measurementNoisePos"] = rhs.measurementNoisePos;
             node["measurementNoiseYaw"] = rhs.measurementNoiseYaw;
             node["initialErrorCov"] = rhs.initialErrorCov;
+            node["yawnoise"] = rhs.yawnoise;
             return node;
         }
 
@@ -158,6 +159,7 @@ namespace YAML
             rhs.measurementNoisePos = node["measurementNoisePos"].as<float>();
             rhs.measurementNoiseYaw = node["measurementNoiseYaw"].as<float>();
             rhs.initialErrorCov = node["initialErrorCov"].as<float>();
+            rhs.yawnoise = node["yawnoise"] ? node["yawnoise"].as<float>() : 0.5f; // 默认值
             return true;
         }
     };
@@ -195,7 +197,7 @@ namespace YAML
             node["light_config"] = rhs.light_config;
             node["armor_config"] = rhs.armor_config;
             node["kalman"] = rhs.kalman;
-            node["udp"] = rhs.udp; // 新增
+            node["udp"] = rhs.udp;
             return node;
         }
 
@@ -207,7 +209,7 @@ namespace YAML
             rhs.light_config = node["light_config"].as<LightConfig>();
             rhs.armor_config = node["armor_config"].as<ArmorConfig>();
             rhs.kalman = node["kalman"].as<KalmanConfig>();
-            rhs.udp = node["udp"].as<UdpConfig>(); // 新增
+            rhs.udp = node["udp"].as<UdpConfig>();
             return true;
         }
     };  

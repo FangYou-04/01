@@ -8,14 +8,14 @@ ExtendedKalman::ExtendedKalman()
       m_initialized(false),
       m_predicetedYaw(0.0f)
 {
-    // 状态向量 6x1 
-    m_state = cv::Mat::zeros(6, 1, CV_32F);
-    // 协方差矩阵 6x6
-    m_cov = cv::Mat::eye(6, 6, CV_32F);
-    // 状态转移矩阵 6x6 （初始为单位阵，在预测时更新）
-    m_F = cv::Mat::eye(6, 6, CV_32F);
-    // 观测噪声矩阵 6x6 （从配置文件加载）
-    m_Q = cv::Mat::zeros(6, 6, CV_32F);
+    // 状态向量 7x1: [x, y, z, vx, vy, vz, yaw]
+    m_state = cv::Mat::zeros(7, 1, CV_32F);
+    // 协方差矩阵 7x7
+    m_cov = cv::Mat::eye(7, 7, CV_32F);
+    // 状态转移矩阵 7x7
+    m_F = cv::Mat::eye(7, 7, CV_32F);
+    // 过程噪声矩阵 7x7
+    m_Q = cv::Mat::zeros(7, 7, CV_32F);
     // 观测噪声矩阵 4x4 （位置三维 + yaw）
     m_R = cv::Mat::zeros(4, 4, CV_32F);
 
@@ -27,17 +27,17 @@ void ExtendedKalman::loadParamInConfig()
     const AppConfig& app_cfg = Config::getInstance()->getConfig();
     const KalmanConfig& c = app_cfg.kalman;
 
-    // 过程噪声 Q
+    // 过程噪声 Q (7x7): [x, y, z, vx, vy, vz, yaw]
     cv::setIdentity(m_Q, cv::Scalar(0));
-    m_Q.at<float>(0,0) = c.processNoisePos;
-    m_Q.at<float>(1,1) = c.processNoisePos;
-    m_Q.at<float>(2,2) = c.processNoisePos;
-    m_Q.at<float>(3,3) = c.processNoiseVel;
-    m_Q.at<float>(4,4) = c.processNoiseVel;
-    m_Q.at<float>(5,5) = c.processNoiseVel;
+    m_Q.at<float>(0,0) = c.processNoisePos;  // x
+    m_Q.at<float>(1,1) = c.processNoisePos;  // y
+    m_Q.at<float>(2,2) = c.processNoisePos;  // z
+    m_Q.at<float>(3,3) = c.processNoiseVel;  // vx
+    m_Q.at<float>(4,4) = c.processNoiseVel;  // vy
+    m_Q.at<float>(5,5) = c.processNoiseVel;  // vz
+    m_Q.at<float>(6,6) = c.yawnoise;         // yaw (偏航角过程噪声)
 
     // 观测噪声 R（位置和偏航）
-    // 假设位置测量噪声与之前相同，偏航噪声单独配置
     float pos_noise = c.measurementNoisePos; // 位置噪声方差
     float yaw_noise = c.measurementNoiseYaw; // 偏航噪声方差（弧度）
     cv::setIdentity(m_R, cv::Scalar(0));
@@ -48,25 +48,29 @@ void ExtendedKalman::loadParamInConfig()
 
     // 初始协方差
     cv::setIdentity(m_cov, cv::Scalar(c.initialErrorCov));
-
 }
 
 void ExtendedKalman::setTransitionMatrix(double dt)
 {
+    // 状态转移矩阵 F (7x7): [x, y, z, vx, vy, vz, yaw]
     cv::setIdentity(m_F);
-    m_F.at<float>(0,3) = dt;
-    m_F.at<float>(1,4) = dt;
-    m_F.at<float>(2,5) = dt;
+    // 位置 = 上一位置 + 速度 * dt
+    m_F.at<float>(0,3) = dt;  // x += vx * dt
+    m_F.at<float>(1,4) = dt;  // y += vy * dt
+    m_F.at<float>(2,5) = dt;  // z += vz * dt
+    // yaw 保持恒定（假设目标不旋转），或者也可以添加 yaw_rate 状态
 }
 
 void ExtendedKalman::init(const cv::Point3f& position, double yaw, double timeStamp)
 {
+    // 状态向量: [x, y, z, vx, vy, vz, yaw]
     m_state.at<float>(0) = position.x;
     m_state.at<float>(1) = position.y;
     m_state.at<float>(2) = position.z;
-    m_state.at<float>(3) = 0.0f;
-    m_state.at<float>(4) = 0.0f;
-    m_state.at<float>(5) = 0.0f;
+    m_state.at<float>(3) = 0.0f;  // vx
+    m_state.at<float>(4) = 0.0f;  // vy
+    m_state.at<float>(5) = 0.0f;  // vz
+    m_state.at<float>(6) = static_cast<float>(yaw);  // yaw
 
     m_lastTime = timeStamp;
     m_predictedPose = position;
@@ -117,14 +121,14 @@ cv::Point3f ExtendedKalman::predict(double timeStamp)
     }
 
     setTransitionMatrix(m_dt);
-    predictState(); // 状态猜测
+    predictState(); // 状态预测
     predictCovariance(); // 协方差预测
 
-    // 提取预测位置
+    // 提取预测位置和yaw
     m_predictedPose.x = m_state.at<float>(0);
     m_predictedPose.y = m_state.at<float>(1);
     m_predictedPose.z = m_state.at<float>(2);
-    m_predicetedYaw = clacYawFromXY(m_predictedPose.x, m_predictedPose.y);
+    m_predicetedYaw = m_state.at<float>(6);  // 直接从状态获取预测 yaw
 
     m_lastTime = timeStamp;
     return m_predictedPose;
@@ -132,26 +136,16 @@ cv::Point3f ExtendedKalman::predict(double timeStamp)
 
 void ExtendedKalman::computeJacobianH(const cv::Mat& state, cv::Mat& H) const
 {
-    // 观测向量为[x, y, z, yaw]^T, yaw = atan2(x, y)
-    // 雅可比矩阵H大小为4x6
-    H = cv::Mat::zeros(4, 6, CV_32F);
+    // 观测向量为[x, y, z, yaw]^T，直接观测
+    // 雅可比矩阵H大小为4x7
+    H = cv::Mat::zeros(4, 7, CV_32F);
     // 前三行直接观测x, y, z
     H.at<float>(0,0) = 1.0f;
     H.at<float>(1,1) = 1.0f;
     H.at<float>(2,2) = 1.0f;
 
-    // 第四行对应yaw对状态向量的偏导
-    float x = state.at<float>(0);
-    float y = state.at<float>(1);
-    float r2 = x*x + y*y;
-    if (r2 < 1e-6f)
-    {
-        r2 = 1e-6f;
-    }
-    H.at<float>(3,0) = -y / r2;  // ∂yaw/∂x
-    H.at<float>(3,1) =  x / r2;  // ∂yaw/∂y
-    // ∂yaw/∂z, ∂yaw/∂vx, ∂yaw/∂vy, ∂yaw/∂vz 均为 0
-
+    // 第四行直接观测yaw（状态向量第7个元素，索引6）
+    H.at<float>(3,6) = 1.0f;
 }
 
 void ExtendedKalman::update(const cv::Mat& z)
@@ -167,32 +161,26 @@ void ExtendedKalman::update(const cv::Mat& z)
     cv::Mat K = m_cov * H.t() * S.inv();
 
     // 3.计算观测残差
-    // 预测观测: h(x_pred) = [x_pred, y_pred, z_pred, atan2(y_pred, x_pred)]^T
+    // 预测观测: h(x_pred) = [x_pred, y_pred, z_pred, yaw_pred]^T
     cv::Mat z_pred(4, 1, CV_32F);
     z_pred.at<float>(0) = m_state.at<float>(0);
     z_pred.at<float>(1) = m_state.at<float>(1);
     z_pred.at<float>(2) = m_state.at<float>(2);
-    z_pred.at<float>(3) = clacYawFromXY(m_state.at<float>(0), m_state.at<float>(1));
+    z_pred.at<float>(3) = m_state.at<float>(6);  // 直接使用状态中的 yaw
 
     cv::Mat y = z - z_pred;
 
-    // 处理角度残差的环绕问题(-n到n)
-    if (y.at<float>(3) > CV_PI)
-    {
-        y.at<float>(3) -= 2*CV_PI;
-    }
-    if (y.at<float>(3) < -CV_PI)
-    {
-        y.at<float>(3) += 2*CV_PI;
-    }
+    // 处理角度残差的环绕问题(-π到π)
+    float& yaw_residual = y.at<float>(3);
+    while (yaw_residual > CV_PI) yaw_residual -= 2.0f * CV_PI;
+    while (yaw_residual < -CV_PI) yaw_residual += 2.0f * CV_PI;
     
     // 4.状态更新
     m_state = m_state + K * y;
 
     // 5.协方差更新(Joseph form 保证对称性)
-    cv::Mat I = cv::Mat::eye(6, 6, CV_32F);
+    cv::Mat I = cv::Mat::eye(7, 7, CV_32F);  // 状态向量为7维
     m_cov = (I - K * H) * m_cov * (I - K * H).t() + K * m_R * K.t();
-    
 }
 
 cv::Point3f ExtendedKalman::update(const cv::Point3f measuredPos, double measuredYaw, double timeStamp)
@@ -223,7 +211,7 @@ cv::Point3f ExtendedKalman::update(const cv::Point3f measuredPos, double measure
         m_state.at<float>(2)
     );
     m_predictedPose = estPos;
-    m_predicetedYaw =clacYawFromXY(estPos.x, estPos.y);
+    m_predicetedYaw = m_state.at<float>(6);  // 直接从状态获取估计 yaw
 
     return estPos;
 }

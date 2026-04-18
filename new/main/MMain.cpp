@@ -17,9 +17,9 @@ int main()
     cv::setNumThreads(0);
     cv::setUseOptimized(false);
     
-    // 帧计数器（每隔5帧发送一次）
+    // 帧计数器（每隔1帧发送一次）
     int frameCounter = 0;
-    const int SEND_INTERVAL = 5;
+    const int SEND_INTERVAL = 0.033;
 
     const AppConfig& appCfg = Config::getInstance()->getConfig();
 
@@ -64,9 +64,9 @@ int main()
     double last_valid_pitch;           
     cv::Mat last_valid_rvec;     
     
-    // // 打开串口（改为 ttyS0）
+    // // 打开串口（改为 ttyAMA0）
     // Serial serial;
-    // if (!serial.open("/dev/ttyS0", B115200))
+    // if (!serial.open("/dev/ttyAMA0", B115200))
     // {
     //     std::cerr << "无法打开串口" << std::endl;
     //     return -1;
@@ -128,7 +128,7 @@ int main()
                 best.tvec.at<double>(2)
             );
 
-            double yaw = best.yaw;
+            double yaw = best.yaw * CV_PI / 180.0; // 转换为弧度
             double pitch = best.pitch;
 
             // 保存上一次有效值（用于绘制及 pitch 预测占位）
@@ -173,12 +173,12 @@ int main()
             }
 
 
-            // ------------------ 串口发送（每5帧，仅检测到装甲板时）------------------
+            // ------------------ 串口发送（每1帧，仅检测到装甲板时）------------------
             // if (frameCounter % SEND_INTERVAL == 0 && serial.is_open())
             // {
             //     char buffer[256];
             //     snprintf(buffer, sizeof(buffer),
-            //              "(yaw: %.3f, pitch: %.3f, dist: %.3f, x: %.3f, y: %.3f, z: %.3f)\n",
+            //              "(yaw:%.3f,pitch:%.3f,dist:%.3f,x:%.3f,y:%.3f,z:%.3f)\n",
             //              pred_yaw_deg, last_valid_pitch, pred_dist,
             //              est_pos.x, est_pos.y, est_pos.z);
                 
