@@ -30,8 +30,8 @@ bool ArmorsDetector::solveArmorPose(Armors& armor)
 
     // 3. 使用 solvePnPGeneric 获取 IPPE 双解
     std::vector<cv::Mat> rvecs, tvecs;
-    cv::solvePnPGeneric(objectPoints, imagePoints, cameraMatrix_, distCoeffs_,
-                        rvecs, tvecs, false, cv::SOLVEPNP_IPPE);
+    cv::solvePnPGeneric(objectPoints, imagePoints, cameraMatrix_, distCoeffs_, // sloverPnPGeneric 能返回多个解，适用于平面标定板
+                        rvecs, tvecs, false, cv::SOLVEPNP_IPPE); // IPPE 适用于平面标定板，能提供两个解（一个在相机前方，一个在相机后方）
 
     if (rvecs.empty() || tvecs.empty())
     {
@@ -96,7 +96,7 @@ bool ArmorsDetector::solveArmorPose(Armors& armor)
     double roll = atan2(R.at<double>(2, 1), R.at<double>(2, 2)) * 180.0 / CV_PI;
 
 
-    if (!std::isfinite(pitch) || !std::isfinite(yaw) || !std::isfinite(roll))
+    if (!std::isfinite(pitch) || !std::isfinite(yaw) || !std::isfinite(roll)) // 检查欧拉角是否为有限值
     {
         std::cerr << "[solveArmorPose] 欧拉角含 NaN/Inf" << std::endl;
         return false;

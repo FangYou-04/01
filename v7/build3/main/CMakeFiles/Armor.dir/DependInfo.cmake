@@ -10,10 +10,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/fang/桌面/vision01/v7/main/Armors.cpp" "main/CMakeFiles/Armor.dir/Armors.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/Armors.cpp.o.d"
   "/home/fang/桌面/vision01/v7/main/Config.cpp" "main/CMakeFiles/Armor.dir/Config.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/Config.cpp.o.d"
-  "/home/fang/桌面/vision01/v7/main/DrawTrack.cpp" "main/CMakeFiles/Armor.dir/DrawTrack.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/DrawTrack.cpp.o.d"
+  "/home/fang/桌面/vision01/v7/main/DrawTracke1.cpp" "main/CMakeFiles/Armor.dir/DrawTracke1.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/DrawTracke1.cpp.o.d"
   "/home/fang/桌面/vision01/v7/main/HikCamera.cpp" "main/CMakeFiles/Armor.dir/HikCamera.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/HikCamera.cpp.o.d"
   "/home/fang/桌面/vision01/v7/main/KalmanTracker.cpp" "main/CMakeFiles/Armor.dir/KalmanTracker.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/KalmanTracker.cpp.o.d"
-  "/home/fang/桌面/vision01/v7/main/Main2.1.cpp" "main/CMakeFiles/Armor.dir/Main2.1.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/Main2.1.cpp.o.d"
+  "/home/fang/桌面/vision01/v7/main/Main3.1.cpp" "main/CMakeFiles/Armor.dir/Main3.1.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/Main3.1.cpp.o.d"
   "/home/fang/桌面/vision01/v7/main/PoseSlove.cpp" "main/CMakeFiles/Armor.dir/PoseSlove.cpp.o" "gcc" "main/CMakeFiles/Armor.dir/PoseSlove.cpp.o.d"
   )
 

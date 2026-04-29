@@ -15,10 +15,10 @@ void drawTrack(cv::Mat& img,
     const float armorWidth = 0.141f;
     const float armorHeight = 0.125f;
     std::vector<cv::Point3f> armor_3d_points;
-    armor_3d_points.emplace_back(-armorWidth/2, armorHeight/2, 0.0f);
-    armor_3d_points.emplace_back( armorWidth/2, armorHeight/2, 0.0f);
-    armor_3d_points.emplace_back( armorWidth/2, -armorHeight/2, 0.0f);
     armor_3d_points.emplace_back(-armorWidth/2, -armorHeight/2, 0.0f);
+    armor_3d_points.emplace_back( armorWidth/2, -armorHeight/2, 0.0f);
+    armor_3d_points.emplace_back( armorWidth/2,  armorHeight/2, 0.0f);
+    armor_3d_points.emplace_back(-armorWidth/2,  armorHeight/2, 0.0f);
     
     // ========== 绘制检测轮廓（红色）==========
     if (!detected_armor.rvec.empty() && !detected_armor.tvec.empty()) {

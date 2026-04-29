@@ -178,29 +178,29 @@ Config.cpp.s:
 	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Config.cpp.s
 .PHONY : Config.cpp.s
 
-DrawTrack.o: DrawTrack.cpp.o
-.PHONY : DrawTrack.o
+DrawTracke1.o: DrawTracke1.cpp.o
+.PHONY : DrawTracke1.o
 
 # target to build an object file
-DrawTrack.cpp.o:
-	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/DrawTrack.cpp.o
-.PHONY : DrawTrack.cpp.o
+DrawTracke1.cpp.o:
+	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/DrawTracke1.cpp.o
+.PHONY : DrawTracke1.cpp.o
 
-DrawTrack.i: DrawTrack.cpp.i
-.PHONY : DrawTrack.i
+DrawTracke1.i: DrawTracke1.cpp.i
+.PHONY : DrawTracke1.i
 
 # target to preprocess a source file
-DrawTrack.cpp.i:
-	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/DrawTrack.cpp.i
-.PHONY : DrawTrack.cpp.i
+DrawTracke1.cpp.i:
+	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/DrawTracke1.cpp.i
+.PHONY : DrawTracke1.cpp.i
 
-DrawTrack.s: DrawTrack.cpp.s
-.PHONY : DrawTrack.s
+DrawTracke1.s: DrawTracke1.cpp.s
+.PHONY : DrawTracke1.s
 
 # target to generate assembly for a file
-DrawTrack.cpp.s:
-	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/DrawTrack.cpp.s
-.PHONY : DrawTrack.cpp.s
+DrawTracke1.cpp.s:
+	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/DrawTracke1.cpp.s
+.PHONY : DrawTracke1.cpp.s
 
 HikCamera.o: HikCamera.cpp.o
 .PHONY : HikCamera.o
@@ -250,29 +250,29 @@ KalmanTracker.cpp.s:
 	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/KalmanTracker.cpp.s
 .PHONY : KalmanTracker.cpp.s
 
-Main2.1.o: Main2.1.cpp.o
-.PHONY : Main2.1.o
+Main3.1.o: Main3.1.cpp.o
+.PHONY : Main3.1.o
 
 # target to build an object file
-Main2.1.cpp.o:
-	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main2.1.cpp.o
-.PHONY : Main2.1.cpp.o
+Main3.1.cpp.o:
+	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main3.1.cpp.o
+.PHONY : Main3.1.cpp.o
 
-Main2.1.i: Main2.1.cpp.i
-.PHONY : Main2.1.i
+Main3.1.i: Main3.1.cpp.i
+.PHONY : Main3.1.i
 
 # target to preprocess a source file
-Main2.1.cpp.i:
-	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main2.1.cpp.i
-.PHONY : Main2.1.cpp.i
+Main3.1.cpp.i:
+	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main3.1.cpp.i
+.PHONY : Main3.1.cpp.i
 
-Main2.1.s: Main2.1.cpp.s
-.PHONY : Main2.1.s
+Main3.1.s: Main3.1.cpp.s
+.PHONY : Main3.1.s
 
 # target to generate assembly for a file
-Main2.1.cpp.s:
-	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main2.1.cpp.s
-.PHONY : Main2.1.cpp.s
+Main3.1.cpp.s:
+	cd /home/fang/桌面/vision01/v7/build3 && $(MAKE) $(MAKESILENT) -f main/CMakeFiles/Armor.dir/build.make main/CMakeFiles/Armor.dir/Main3.1.cpp.s
+.PHONY : Main3.1.cpp.s
 
 PoseSlove.o: PoseSlove.cpp.o
 .PHONY : PoseSlove.o
@@ -313,18 +313,18 @@ help:
 	@echo "... Config.o"
 	@echo "... Config.i"
 	@echo "... Config.s"
-	@echo "... DrawTrack.o"
-	@echo "... DrawTrack.i"
-	@echo "... DrawTrack.s"
+	@echo "... DrawTracke1.o"
+	@echo "... DrawTracke1.i"
+	@echo "... DrawTracke1.s"
 	@echo "... HikCamera.o"
 	@echo "... HikCamera.i"
 	@echo "... HikCamera.s"
 	@echo "... KalmanTracker.o"
 	@echo "... KalmanTracker.i"
 	@echo "... KalmanTracker.s"
-	@echo "... Main2.1.o"
-	@echo "... Main2.1.i"
-	@echo "... Main2.1.s"
+	@echo "... Main3.1.o"
+	@echo "... Main3.1.i"
+	@echo "... Main3.1.s"
 	@echo "... PoseSlove.o"
 	@echo "... PoseSlove.i"
 	@echo "... PoseSlove.s"

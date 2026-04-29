@@ -19,7 +19,7 @@ int main()
     
     // 帧计数器（每隔1帧发送一次）
     int frameCounter = 0;
-    const int SEND_INTERVAL = 1;
+    const int SEND_INTERVAL = 0.033;
 
     const AppConfig& appCfg = Config::getInstance()->getConfig();
 
@@ -128,7 +128,7 @@ int main()
                 best.tvec.at<double>(2)
             );
 
-            double yaw = best.yaw * CV_PI / 180.0; // 转换为弧度
+            double yaw = best.yaw;
             double pitch = best.pitch;
 
             // 保存上一次有效值（用于绘制及 pitch 预测占位）

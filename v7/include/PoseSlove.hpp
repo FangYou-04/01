@@ -27,8 +27,14 @@ public:
     ArmorsDetector(const cv::Mat& cameraMatrix, const cv::Mat& distCoeffs);
 // 核心接口：输入图像中的装甲板，输出其位姿信息
     std::vector<Armors> detect(const cv::Mat frame);
-// 友元
-    friend void drawFriend(ArmorsDetector& detector, cv::Mat& img, const std::vector<Light> &lights, const std::vector<Armors> &armors);
+    
+// ROI 设置接口
+    void setROI(const cv::Rect& roi);
+    void setROI(const cv::Point2f& center, float width, float height);
+    void clearROI();
+    cv::Rect getROI() const { return m_roi; }
+    bool hasROI() const { return m_hasROI; }
+    
 private:
     // 图像预处理
     cv::Mat preprocessImage(const cv::Mat &frame);
@@ -38,8 +44,6 @@ private:
     std::vector<Armors> matchArmors(const std::vector<Light> &lights);
     // 位姿估计
     bool solveArmorPose(Armors &armor);
-    // 绘制
-    void draw(cv::Mat &img, const std::vector<Light> &lights, const std::vector<Armors> &armors);
 
     // 相机内参和畸变参数
     cv::Mat cameraMatrix_;
@@ -50,6 +54,12 @@ private:
     // 装甲板固定物理尺寸（单位：米）
     const float armorWidth_ = 0.141f;
     const float armorHeight_ = 0.125f;
+    // ROI 区域
+    cv::Rect m_roi;
+    bool m_hasROI;
+    
+    // 内部辅助函数
+    cv::Rect clampROI(const cv::Mat& img) const;
 };
 
 #endif // POSE_SLOVE_H

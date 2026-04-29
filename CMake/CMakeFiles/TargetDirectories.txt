@@ -1,3 +1,0 @@
-/home/fang/下载/CMake/CMakeFiles/app.dir
-/home/fang/下载/CMake/CMakeFiles/edit_cache.dir
-/home/fang/下载/CMake/CMakeFiles/rebuild_cache.dir

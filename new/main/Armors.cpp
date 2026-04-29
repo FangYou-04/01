@@ -19,15 +19,15 @@ cv::Mat ArmorsDetector::preprocessImage(const cv::Mat &img)
 
     cv::Mat img_continuous = img.isContinuous() ? img : img.clone();
 
-    // 亮度调整（用户可能设置 beta 为负值，例如 -50）
+    // 亮度调整
     cv::Mat img_L;
     int beta = -90; // 如果要测试不同亮度请修改此处
-    img_continuous.convertTo(img_L, -1, 0.7, beta);
+    img_continuous.convertTo(img_L, -1, 0.7, beta);  // 降低对比度
 
    cv::Mat gray, blur, binary;
     cv::cvtColor(img_L, gray, cv::COLOR_BGR2GRAY);
     cv::GaussianBlur(gray, blur, cv::Size(3, 3), 0); // 在灰度图阶段模糊，减少噪声
-    // cv::threshold(blur, binary, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
+    // cv::threshold(blur, binary, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU); // 大津阈值
     cv::adaptiveThreshold(blur, binary, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 15, -5); // 自适应阈值
 
     cv::Mat kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(config_.morph_config.kernel_size, config_.morph_config.kernel_size));
@@ -86,20 +86,10 @@ std::vector<Light> ArmorsDetector::detectLights(const cv::Mat &mask)
 
         // 计算比例和角度
         float ratio = 0.0f; // 【必做】变量显式初始化
-        const float eps = 1e-6; // 浮点精度容错值，避免除0
-        if (width > eps) {
+        if (width > 0.0f) // 避免除0
+        {
             ratio = height / width;
         }
-
-        // 计算轮廓的圆形度（灯条为细长矩形，圆形度接近0；反光点为圆形，圆形度接近1）
-        float perimeter = cv::arcLength(contours[i], true);
-        float circularity = 0.0f; // 【必做】变量显式初始化
-        if (perimeter > eps) {
-            circularity = (4 * CV_PI * area) / (perimeter * perimeter);
-        }
-        
-        bool isNoise = (circularity > 0.8f) && (ratio < 3.0f); // 根据经验值判断是否为噪声
-        if (isNoise) continue;
 
         // 筛选符合比例和角度要求的灯条
         if (ratio > config_.light_config.ratio_max || ratio < config_.light_config.ratio_min)
@@ -152,8 +142,7 @@ std::vector<Armors> ArmorsDetector::matchArmors(const std::vector<Light> &lights
             float distance = cv::norm(leftBar.center - rightBar.center);
             float heightAvg = (leftBar.rect.size.height + rightBar.rect.size.height) / 2;
 
-            const float eps = 1e-6; // 浮点精度容错值，避免除0
-            if (heightAvg < eps) continue; // 避免除0
+            if (heightAvg < 0.0f) continue; // 避免除0
 
             // 距离筛选
             float distMin = heightAvg * config_.armor_config.distance_min;

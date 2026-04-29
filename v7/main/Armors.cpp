@@ -22,35 +22,22 @@ cv::Mat ArmorsDetector::preprocessImage(const cv::Mat &img)
     // 亮度调整（用户可能设置 beta 为负值，例如 -50）
     cv::Mat img_L;
     int beta = -90; // 如果要测试不同亮度请修改此处
-    img_continuous.convertTo(img_L, -1, 1, beta);
+    img_continuous.convertTo(img_L, -1, 0.7, beta);
 
    cv::Mat gray, blur, binary;
     cv::cvtColor(img_L, gray, cv::COLOR_BGR2GRAY);
-    cv::GaussianBlur(gray, blur, cv::Size(5, 5), 0); // 在灰度图阶段模糊，减少噪声
-    cv::threshold(blur, binary, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
+    cv::GaussianBlur(gray, blur, cv::Size(3, 3), 0); // 在灰度图阶段模糊，减少噪声
+    // cv::threshold(blur, binary, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
+    cv::adaptiveThreshold(blur, binary, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 15, -5); // 自适应阈值
 
     cv::Mat kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(config_.morph_config.kernel_size, config_.morph_config.kernel_size));
     cv::Mat img_N;
-    cv::morphologyEx(binary, img_N, cv::MORPH_OPEN, kernel); // 直接对二值图形态学操作
+    cv::morphologyEx(binary, img_N, cv::MORPH_CLOSE, kernel); // 直接对二值图形态学操作
     cv::imshow("二值化", img_N);
 
     return img_N;
 }
 
-// 调整旋转矩形角度，使其长边接近垂直方向
-void adjustRotatedRect(cv::RotatedRect& rect, const float angle_to_up)
-{
-    // 保证 rect.size.height 为长边，并对 angle 做规范化到 [-90,90)
-    float w = rect.size.width;
-    float h = rect.size.height;
-    if (w > h) {
-        std::swap(rect.size.width, rect.size.height);
-        rect.angle += 90.0f; // 旋转角度随长短边交换而变化
-    }
-    // 规范化角度到 [-90,90)
-    while (rect.angle >= 90.0f) rect.angle -= 180.0f;
-    while (rect.angle < -90.0f) rect.angle += 180.0f;
-}
 
 // 灯条检测
 std::vector<Light> ArmorsDetector::detectLights(const cv::Mat &mask) 
@@ -82,12 +69,20 @@ std::vector<Light> ArmorsDetector::detectLights(const cv::Mat &mask)
         //     rect = cv::minAreaRect(contours[i]); // 椭圆拟合失败时降级
         // }
 
-        adjustRotatedRect(rect, config_.light_config.angle_to_up); // 调整角度使其接近垂直
-
         // 规范化宽高
         float width = rect.size.width;
         float height = rect.size.height;
-        if (width > height) cv::swap(width, height);
+        float angle = rect.angle;
+        if (width > height)
+        {
+            std::swap(width, height);
+            angle += 90.0f; // 旋转角度调整
+            if (angle > 90.0f)
+            {
+                angle -= 180.0f; // 保持角度在 [-90, 90] 范围内
+            }
+            
+        }
 
         // 计算比例和角度
         float ratio = 0.0f; // 【必做】变量显式初始化
@@ -96,17 +91,15 @@ std::vector<Light> ArmorsDetector::detectLights(const cv::Mat &mask)
             ratio = height / width;
         }
 
-        float angle = rect.angle;
-
-        // // 计算轮廓的圆形度（灯条为细长矩形，圆形度接近0；反光点为圆形，圆形度接近1）
-        // float perimeter = cv::arcLength(contours[i], true);
-        // float circularity = 0.0f; // 【必做】变量显式初始化
-        // if (perimeter > eps) {
-        //     circularity = (4 * CV_PI * area) / (perimeter * perimeter);
-        // }
+        // 计算轮廓的圆形度（灯条为细长矩形，圆形度接近0；反光点为圆形，圆形度接近1）
+        float perimeter = cv::arcLength(contours[i], true);
+        float circularity = 0.0f; // 【必做】变量显式初始化
+        if (perimeter > eps) {
+            circularity = (4 * CV_PI * area) / (perimeter * perimeter);
+        }
         
-        // bool isNoise = (circularity > 0.8f) && (ratio < 1.8f); // 根据经验值判断是否为噪声
-        // if (isNoise) continue;
+        bool isNoise = (circularity > 0.8f) && (ratio < 3.0f); // 根据经验值判断是否为噪声
+        if (isNoise) continue;
 
         // 筛选符合比例和角度要求的灯条
         if (ratio > config_.light_config.ratio_max || ratio < config_.light_config.ratio_min)
@@ -162,27 +155,47 @@ std::vector<Armors> ArmorsDetector::matchArmors(const std::vector<Light> &lights
             const float eps = 1e-6; // 浮点精度容错值，避免除0
             if (heightAvg < eps) continue; // 避免除0
 
-            // 恢复垂直偏差筛选（关键！）
-            float yDiff = std::fabs(leftBar.center.y - rightBar.center.y);
-            if (yDiff > heightAvg * 0.9f) continue; // 垂直偏差≤50%
-
             // 距离筛选
-            if (distance < heightAvg * config_.armor_config.distance_min || distance > heightAvg * config_.armor_config.distance_max) 
-                continue; 
+            float distMin = heightAvg * config_.armor_config.distance_min;
+            float distMax = heightAvg * config_.armor_config.distance_max;
+            if (distance < distMin || distance > distMax) {
+                std::cout << "[不满足] 距离不在范围内: dist=" << distance << ", range=[" << distMin << ", " << distMax << "]" << std::endl;
+                continue;
+            }
 
             float angle = fabs(atan2(rightBar.center.y - leftBar.center.y,
                                      rightBar.center.x - leftBar.center.x) * 180 / CV_PI);
-            if (angle > config_.armor_config.armor_angle) continue;
+            if (angle > config_.armor_config.armor_angle) {
+                std::cout << "[不满足] 装甲板角度过大: angle=" << angle << ", limit=" << config_.armor_config.armor_angle << std::endl;
+                continue;
+            }
 
             float heightDiff = fabs(leftBar.rect.size.height - rightBar.rect.size.height)
                                / std::max(leftBar.rect.size.height, rightBar.rect.size.height);
-            if (heightDiff > config_.armor_config.height_diff) continue;
+            if (heightDiff > config_.armor_config.height_diff) {
+                std::cout << "[不满足] 高度差过大: heightDiff=" << heightDiff << ", limit=" << config_.armor_config.height_diff << std::endl;
+                continue;
+            }
 
             float angleDiff = fabs(leftBar.AbsAngle - rightBar.AbsAngle);
-            if (angleDiff > config_.armor_config.angle_diff) continue;
+            if (angleDiff > config_.armor_config.angle_diff) {
+                std::cout << "[不满足] 灯条角度差过大: angleDiff=" << angleDiff << ", limit=" << config_.armor_config.angle_diff << std::endl;
+                continue;
+            }
 
             float armorRatio = distance / heightAvg;
-            if (armorRatio < config_.armor_config.armor_ratio_min || armorRatio > config_.armor_config.armor_ratio_max) continue;
+            if (armorRatio < config_.armor_config.armor_ratio_min || armorRatio > config_.armor_config.armor_ratio_max) {
+                std::cout << "[不满足] 装甲板比例不在范围内: ratio=" << armorRatio << ", range=[" << config_.armor_config.armor_ratio_min << ", " << config_.armor_config.armor_ratio_max << "]" << std::endl;
+                continue;
+            }
+
+            // 垂直偏差筛选（放宽以适应斜视角切入）
+            float yDiff = std::fabs(leftBar.center.y - rightBar.center.y);
+            if (yDiff > heightAvg * 3.0f) {
+                // 调试：打印哪个条件不满足
+                std::cout << "[不满足] 垂直偏差过大: yDiff=" << yDiff << ", limit=" << heightAvg * 3.0f << std::endl;
+                continue;
+            }
 
             Armors armor;
             armor.left = leftBar;

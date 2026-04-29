@@ -1,4 +1,4 @@
-#include "DrawTracke1.hpp"
+#include "DrawTrack.hpp"
 #include <cstdio>
 #include <cmath>
 #include <opencv2/opencv.hpp>
@@ -6,7 +6,7 @@
 void drawTrack(cv::Mat& img, 
             const Armors& detected_armor, 
             const cv::Point3f& predict_position, 
-            double predict_yaw,
+            double predict_yaw_deg,
             const cv::Mat& last_valid_rvec,
             const cv::Mat& camera_matrix,
             const cv::Mat& dist_coeffs)
@@ -44,15 +44,6 @@ void drawTrack(cv::Mat& img,
         rvec = detected_armor.rvec.clone();
     } else if (!last_valid_rvec.empty()) {
         rvec = last_valid_rvec.clone();
-    } else {
-        // 无任何历史：用预测的 yaw 构造 rvec
-        cv::Mat rot_mat = cv::Mat::zeros(3, 3, CV_64F);
-        rot_mat.at<double>(0, 0) = cos(predict_yaw);
-        rot_mat.at<double>(0, 1) = -sin(predict_yaw);
-        rot_mat.at<double>(1, 0) = sin(predict_yaw);
-        rot_mat.at<double>(1, 1) = cos(predict_yaw);
-        rot_mat.at<double>(2, 2) = 1.0;
-        cv::Rodrigues(rot_mat, rvec);
     }
     
     // 强制使用预测的 tvec
@@ -98,7 +89,7 @@ void drawTrack(cv::Mat& img,
                 cv::Scalar(255, 255, 255), 2);
     
     char text2[100];
-    snprintf(text2, sizeof(text2), "Predict Yaw: %.2f deg", predict_yaw);
+    snprintf(text2, sizeof(text2), "Predict Yaw: %.2f", predict_yaw_deg);
     cv::putText(img, text2, cv::Point(10, 60), cv::FONT_HERSHEY_SIMPLEX, 0.5, 
                 cv::Scalar(255, 255, 255), 2);
 }
